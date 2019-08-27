@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="imagem/png" href="img/livraria-ico.png" />
+<title>Lista de Livros</title>
+<link href="css/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="css/admin.css" rel="stylesheet" />
+<link href="css/lista.css" rel="stylesheet" />
+</head>
+<body>
+	<div th:insert="~{fragment/admin :: menu}"></div>
+	<div class="container">
+		<ul class="mdl-list">
+			<li class="mdl-list__item" th:if="${msg_resultado}">						 	
+				<p id="p-mensagem-sucesso" class="sucesso-msg" th:text="${msg_resultado}" >...</p>		
+			</li>
+		</ul>
+		<table class="table table-bordered table-striped table-hover">
+			<thead>
+				<th>Título</th>
+				<th>Descrição</th>
+				<th>Páginas</th>
+				<th>Data de Lançamento</th>
+				<th class="preco">Preço</th>
+				<th>Capa</th>
+			</thead>
+			<tbody>
+				<tr th:if="${livros.empty}">
+					<td colspan="2">Parece não haver nenhum livro cadastrado :/</td>
+				</tr>
+				<tr th:each="livro : ${livros}">
+					<td><span th:text="${livro.titulo}"> Título </span></td>
+					<td><span th:text="${livro.descricao}"> Descrição </span></td>
+					<td><span th:text="${livro.paginas}"> Páginas </span></td>
+					<td><span th:text="${livro.dataLancamento}"> Data de Lançamento </span></td>
+					<td><span th:text="${livro.preco}"> Preço </span></td>
+					<td><img class="capas" th:src="${'img/capa/' + livro.sumarioPath}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<div th:insert="~{fragment/admin :: footer}"></div>
+</body>
+</html>

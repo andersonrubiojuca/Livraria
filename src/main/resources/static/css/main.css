@@ -1,0 +1,40 @@
+@font-face {
+    font-family: Montserrat;
+    src: url(../font/Montserrat-Regular.ttf);
+}
+
+body{
+	font-family: Montserrat;
+}
+
+.header{
+	background-color: #815b3f;
+}
+
+.header-img{
+	height: 60px;
+	width: 120px;
+}
+
+.logo-header{
+	background-color: #fff;
+	width: 20%;
+}
+
+
+.navbar-light .navbar-nav .nav-link{
+	color: white;
+	font-weight: 700;
+}
+
+
+.text-footer, h5{
+	color: white;
+}
+
+.footer{
+	background-color: #bd8460;
+	position: relative;
+	bottom: 0;
+	width: 100%;
+}

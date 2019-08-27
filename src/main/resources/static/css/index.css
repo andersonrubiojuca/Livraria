@@ -1,0 +1,13 @@
+
+
+.lista-livros {
+
+	list-style-type: none;
+	display:inline-block;
+
+}
+
+.capas{
+	width: 143px;
+	height: 202px;
+}

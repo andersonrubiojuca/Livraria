@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<link rel="icon" type="imagem/png" th:href="@{../img/livraria-ico.png}" />
+	<title>Livraria Assis - Conhecimento ao seu alcance</title>
+	<link th:href="@{../css/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+	<link th:href="@{../css/main.css}" rel="stylesheet" />
+	<link th:href="@{../css/index.css}" rel="stylesheet" />
+</head>
+<body>
+    
+	<div th:insert="~{fragment/main :: menu}" class="header"></div>
+    
+    <div class="jumbotron jumbotron-fluid">
+	    <div class="container">
+	    
+	        <ul class="lista-livros" th:each="livro : ${livros}">
+				<li>
+					<a th:href="${'produto/' + livro.id}">
+						<h2 class="product-title"><span th:text="${livro.titulo}"> Título </span></h2>
+						<img class="capas" th:src="${'img/capa/' + livro.sumarioPath}">
+					</a>
+				</li>
+			</ul>
+			
+	    </div>
+    </div>
+
+	<div class="footer" th:insert="~{fragment/main :: footer}"></div>
+</body>
+</html>
