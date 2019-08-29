@@ -32,11 +32,12 @@ public class LivroService {
 		repository.deleteById(id);
 	}
 	
-	public Livro listarPorId(Long id) {
-		Livro livro = new Livro();
+	//lembrar de mecher nessa função futuramente
+	public LivroDTO listarPorId(Long id) {
+		LivroDTO livro = new LivroDTO();
 		Optional<Livro> OpLivro = repository.findById(id);
 		if(OpLivro.isPresent()) {
-			livro = OpLivro.get();
+			livro = toLivroDTO(OpLivro.get());
 		}
 		
 		return livro;
@@ -47,24 +48,8 @@ public class LivroService {
 		ArrayList<Livro> livros = (ArrayList<Livro>) repository.findAll();
 		ArrayList<LivroDTO> livrosDTO = new ArrayList<>();
 		
-		for(Livro livro : livros) {
-			LivroDTO livroDTO = new LivroDTO();
-			
-			livroDTO.setId(livro.getId());
-			livroDTO.setTitulo(livro.getTitulo());
-			livroDTO.setDescricao(livro.getDescricao());
-			livroDTO.setPaginas("" + livro.getPaginas());
-			livroDTO.setDataLancamento(dataLiquida(livro.getDataLancamento()));
-			livroDTO.setPreco(moeda(livro.getPreco()));
-			
-			if(livro.getSumarioPath() == null) 
-				livroDTO.setSumarioPath(generico);
-			 else 
-				livroDTO.setSumarioPath(livro.getSumarioPath());
-			
-			livrosDTO.add(livroDTO);
-			
-		}
+		for(Livro livro : livros) 
+			livrosDTO.add(toLivroDTO(livro));
 		
 		return livrosDTO;
 	}
@@ -81,4 +66,21 @@ public class LivroService {
 		return NumberFormat.getCurrencyInstance(new Locale("pt", "br")).format(moeda);
 	}
 
+	private LivroDTO toLivroDTO(Livro livro) {
+		LivroDTO livroDTO = new LivroDTO();
+		
+		livroDTO.setId(livro.getId());
+		livroDTO.setTitulo(livro.getTitulo());
+		livroDTO.setDescricao(livro.getDescricao());
+		livroDTO.setPaginas("" + livro.getPaginas());
+		livroDTO.setDataLancamento(dataLiquida(livro.getDataLancamento()));
+		livroDTO.setPreco(moeda(livro.getPreco()));
+		
+		if(livro.getSumarioPath() == null) 
+			livroDTO.setSumarioPath(generico);
+		 else 
+			livroDTO.setSumarioPath(livro.getSumarioPath());
+		
+		return livroDTO;
+	}
 }

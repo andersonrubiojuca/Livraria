@@ -15,11 +15,11 @@ public class ProdutoController {
 	@Autowired
 	private LivroService service;
 
-	@RequestMapping(value="/produto/{id}", method=RequestMethod.GET)
+	@RequestMapping(value="/detalhes/{id}", method=RequestMethod.GET)
 	public String produto(Model model, @PathVariable("id") Long id) {
 		
 		model.addAttribute("livro", service.listarPorId(id));
 		
-		return "cliente/produto";
+		return "cliente/detalhes";
 	}
 }
