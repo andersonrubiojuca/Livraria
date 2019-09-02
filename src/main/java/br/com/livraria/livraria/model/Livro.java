@@ -1,6 +1,7 @@
 package br.com.livraria.livraria.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Calendar;
 
 import javax.persistence.Entity;
@@ -74,6 +75,10 @@ public class Livro implements Serializable{
 
 	public double getPreco() {
 		return preco;
+	}
+	
+	public BigDecimal getPreco1() {
+		return new BigDecimal(preco);
 	}
 
 	public void setPreco(double preco) {
@@ -155,6 +160,10 @@ public class Livro implements Serializable{
 		} else if (!titulo.equals(other.titulo))
 			return false;
 		return true;
+	}
+
+	public BigDecimal getTotal(Long long1) {
+		return this.getPreco1().multiply(new BigDecimal(long1));		
 	}
 	
 	
