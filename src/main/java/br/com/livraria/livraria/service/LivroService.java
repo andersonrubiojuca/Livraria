@@ -25,16 +25,9 @@ public class LivroService {
 		repository.deleteById(id);
 	}
 	
-	//lembrar de mecher nessa função futuramente
-	public LivroDTO listarPorId(Long id) {
-		LivroDTO livro = null;
+	public Optional<Livro> listarPorId(Long id) {
 		Optional<Livro> OpLivro = repository.findById(id);
-		
-		if(OpLivro.isPresent()) {
-			livro = new LivroDTO(OpLivro.get());
-		}
-		
-		return livro;
+		return OpLivro;
 	}
 	
 	

@@ -3,6 +3,7 @@ package br.com.livraria.livraria.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -19,6 +20,8 @@ public class CarrinhoCompras implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Map<Livro, Long> itens = new LinkedHashMap<>();
+	
+	private Date date;
 	
 	public Collection<Livro> getItens(){
 		return itens.keySet();
@@ -54,5 +57,13 @@ public class CarrinhoCompras implements Serializable{
 
 	public void limpa() {
 		this.itens.clear();
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 }

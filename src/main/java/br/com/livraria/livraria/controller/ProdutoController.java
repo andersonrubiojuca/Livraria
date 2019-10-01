@@ -1,6 +1,6 @@
 package br.com.livraria.livraria.controller;
 
-import javax.validation.Valid;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +14,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.livraria.livraria.model.Livro;
 import br.com.livraria.livraria.model.dto.LivroDTO;
-import br.com.livraria.livraria.model.form.LivroForm;
 import br.com.livraria.livraria.service.LivroService;
 
 @Controller
@@ -31,6 +30,7 @@ public class ProdutoController {
 		return "cliente/detalhes";
 	}
 	
+	//lembrar de mecher nisso
 	@RequestMapping(value="/Lista-de-itens")
 	public String itens(
 			@RequestParam("livroId") String livroId,
@@ -38,11 +38,17 @@ public class ProdutoController {
 			Model model,
 			RedirectAttributes redirectAttributes
 			) {
-		LivroDTO livro = service.listarPorId(Long.getLong(livroId));
+		Optional<Livro> livroOp = service.listarPorId(Long.getLong(livroId));
+		
+		//mecher nisso
+		@Deprecated
+		LivroDTO livro = new LivroDTO(livroOp.get());
 		
 		if(result.hasErrors()) {
 			return "redirect:/index";
 		}
+		
+		model.addAttribute("livro", livro);
 		
 		return "redirect:/cliente/itens";
 	}

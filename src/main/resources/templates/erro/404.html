@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head xmlns:th="http://www.thymeleaf.org">
+	<meta charset="UTF-8">
+	<link rel="icon" type="imagem/png" th:href="@{../img/livraria-ico.png}" />
+	<title>Livraria Assis - Erro 404</title>
+	<link th:href="@{../css/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+	<link th:href="@{../css/main.css}" rel="stylesheet" />
+	<link th:href="@{../css/index.css}" rel="stylesheet" />
+	</head>
+<body>
+	<div th:insert="~{fragment/main :: menu}" class="header"></div>
+	
+	<div class="jumbotron jumbotron-fluid">
+	    <div class="container">
+	    
+	        <h1>Erro 404 - Livro não encontrado!</h1>
+	        <img th:src="@{../img/recursos/404.jpg" alt="erro 404">
+			
+	    </div>
+    </div>
+	
+	<div class="footer" th:insert="~{fragment/main :: footer}"></div>
+</body>
+</html>
