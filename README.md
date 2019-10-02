@@ -1,6 +1,6 @@
 # Livraria
 
-Demonstração de utilidzação do Spring-Boot e thymeleaf. Esta versão ainda está no seu inicio, sendo apenas uma breve demonstração do que virá quando terminado.
+Demonstração de utilização do Spring-Boot e thymeleaf. Esta versão ainda está no seu inicio, sendo apenas uma breve demonstração do que virá quando terminado.
 
 ## Instalação
 
