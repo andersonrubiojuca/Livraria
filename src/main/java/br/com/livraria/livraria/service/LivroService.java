@@ -32,7 +32,7 @@ public class LivroService {
 	
 	
 	public ArrayList<LivroDTO> listar(){
-		ArrayList<Livro> livros = (ArrayList<Livro>) repository.findAll();
+		Iterable<Livro> livros =  repository.findAll();
 		ArrayList<LivroDTO> livrosDTO = new ArrayList<>();
 		
 		for(Livro livro : livros) 

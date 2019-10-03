@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.livraria.livraria.model.Livro;
+import br.com.livraria.livraria.model.CarrinhoCompras;
+import br.com.livraria.livraria.model.LivroDTO;
 import br.com.livraria.livraria.model.dto.LivroDTO;
 import br.com.livraria.livraria.service.LivroService;
 
@@ -20,10 +21,13 @@ public class ProdutoController {
 	
 	@Autowired
 	private LivroService service;
+	
+	@Autowired
+	private CarrinhoCompras carrinho;
 
 	@RequestMapping(value="/detalhes/{id}", method=RequestMethod.GET)
 	public String produto(Model model, @PathVariable("id") Long id) {
-		Optional<Livro> livroOp = service.listarPorId(id);
+		Optional<LivroDTO> livroOp = service.listarPorId(id);
 		
 		if(livroOp.isPresent()) {
 			LivroDTO livroDto = new LivroDTO(livroOp.get());
@@ -37,7 +41,7 @@ public class ProdutoController {
 		
 	}
 	
-	@RequestMapping(value="/Lista-de-itens")
+	@RequestMapping(value="/carrinho")
 	public String itens(
 			@RequestParam("livroId") String livroId,
 			Model model,
@@ -46,13 +50,18 @@ public class ProdutoController {
 		
 		Optional<Livro> livroOp = service.listarPorId(Long.parseLong(livroId));
 		
-		@Deprecated
-		LivroDTO livro = new LivroDTO(livroOp.get());
-		
-		
-		model.addAttribute("livro", livro);
-		
-		return "redirect:cliente/itens";
+		if(livroOp.isPresent()) {
+			LivroDTO livro = new LivroDTO(livroOp.get());
+			
+			carrinho.add(livro);
+			
+			model.addAttribute("livro", livro);
+			
+			return "redirect:/cliente/itens";
+			
+		} else {
+			return "erro/404";
+		}
 	}
 	
 }
