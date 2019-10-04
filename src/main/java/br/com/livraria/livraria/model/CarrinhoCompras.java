@@ -20,7 +20,7 @@ public class CarrinhoCompras implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Map<Livro, Long> itens = new LinkedHashMap<>();
-	
+
 	private Date date;
 	
 	public Collection<Livro> getItens(){
