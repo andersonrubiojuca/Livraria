@@ -10,14 +10,29 @@
 <body>
 	<div th:insert="~{fragment/main :: menu}" class="header"></div>
 	
-		<div class="jumbotron jumbotron-fluid">
+		<section class="jumbotron jumbotron-fluid">
 	
 		<div class="container">
+		<h1>Seu Carrinho!</h1>
+		<p th:text="${sucesso}"> sucesso </p>
+		<p th:text="${falha}"> falha </p>
 	
-			<p>Oi gente</p>
-			
-		</div>
+		<table class="table table-bordered table-striped table-hover">
+			<tr>
+				<th>Título</th>
+				<th>Descrição</th>
+				<th>Preços</th> 
+				<th>Páginas</th>
+			</tr>
+			<tr th:each="livro : ${carrinho.itens}">
+				<td><span th:text="${livro.titulo }">Titulo</span></td>
+				<td><span th:text="${livro.descricao }">Descrição</span></td>
+				<td><span th:text="${livro.preco }">Preços</span></td>
+				<td><span th:text="${livro.paginas }">Páginas</span></td>
+			</tr>
+		</table>
 	</div>
+	</section>
 	
 	<div class="footer" th:insert="~{fragment/main :: footer}"></div>
 </body>

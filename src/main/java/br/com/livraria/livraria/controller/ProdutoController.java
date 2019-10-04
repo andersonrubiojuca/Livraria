@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.livraria.livraria.model.CarrinhoCompras;
+<<<<<<< HEAD
 import br.com.livraria.livraria.model.LivroDTO;
+=======
+import br.com.livraria.livraria.model.Livro;
+>>>>>>> temp
 import br.com.livraria.livraria.model.dto.LivroDTO;
 import br.com.livraria.livraria.service.LivroService;
 
@@ -22,6 +26,10 @@ public class ProdutoController {
 	@Autowired
 	private LivroService service;
 	
+<<<<<<< HEAD
+=======
+	
+>>>>>>> temp
 	@Autowired
 	private CarrinhoCompras carrinho;
 
@@ -41,7 +49,11 @@ public class ProdutoController {
 		
 	}
 	
+<<<<<<< HEAD
 	@RequestMapping(value="/carrinho")
+=======
+	@RequestMapping(value="/carrinho", method=RequestMethod.POST)
+>>>>>>> temp
 	public String itens(
 			@RequestParam("livroId") String livroId,
 			Model model,
@@ -51,6 +63,7 @@ public class ProdutoController {
 		Optional<Livro> livroOp = service.listarPorId(Long.parseLong(livroId));
 		
 		if(livroOp.isPresent()) {
+<<<<<<< HEAD
 			LivroDTO livro = new LivroDTO(livroOp.get());
 			
 			carrinho.add(livro);
@@ -62,6 +75,25 @@ public class ProdutoController {
 		} else {
 			return "erro/404";
 		}
+=======
+			
+			carrinho.add(livroOp.get());
+			
+			model.addAttribute("carrinho", carrinho);
+			
+			return "redirect:/carrinho";
+		} else {
+			return "erro/404";
+		}
+		
+	}
+	
+	@RequestMapping(value="/carrinho", method=RequestMethod.GET)
+	public String lista(Model model) {
+		model.addAttribute("carrinho", carrinho);
+		
+		return "cliente/itens";
+>>>>>>> temp
 	}
 	
 }

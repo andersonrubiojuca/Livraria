@@ -19,8 +19,13 @@ public class CarrinhoCompras implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
+<<<<<<< HEAD
 	private Map<LivroDTO, Long> itens = new LinkedHashMap<>();
 	
+=======
+	private Map<Livro, Long> itens = new LinkedHashMap<>();
+
+>>>>>>> temp
 	private Date date;
 	
 	public Collection<LivroDTO> getItens(){
