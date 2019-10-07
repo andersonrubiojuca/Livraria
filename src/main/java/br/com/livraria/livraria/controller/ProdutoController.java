@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.livraria.livraria.model.CarrinhoCompras;
 import br.com.livraria.livraria.model.dto.LivroDTO;
 import br.com.livraria.livraria.model.Livro;
+import br.com.livraria.livraria.model.LivroQuant;
 import br.com.livraria.livraria.service.LivroService;
 
 @Controller
@@ -51,8 +52,9 @@ public class ProdutoController {
 		Optional<Livro> livroOp = service.listarPorId(Long.parseLong(livroId));
 		
 		if(livroOp.isPresent()) {
+			LivroQuant livroq = new LivroQuant(livroOp.get());
 			
-			carrinho.add(livroOp.get());
+			carrinho.add(livroq);
 			
 			model.addAttribute("carrinho", carrinho);
 			

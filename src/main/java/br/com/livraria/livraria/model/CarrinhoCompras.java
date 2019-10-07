@@ -2,10 +2,10 @@ package br.com.livraria.livraria.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -19,39 +19,39 @@ public class CarrinhoCompras implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private Map<Livro, Long> itens = new LinkedHashMap<>();
+	private Map<LivroQuant, Long> itens = new LinkedHashMap<>();
 	
 
 	private Date date;
 	
-	public Collection<Livro> getItens(){
+	public Set<LivroQuant> getItens(){
 		return itens.keySet();
 	}
 	
-	public void add(Livro item) {
+	public void add(LivroQuant item) {
 		itens.put(item, getQuantidade(item) + 1);
 	}
 	
-	public Long getQuantidade(Livro item) {
+	public Long getQuantidade(LivroQuant item) {
 		return this.itens.values().stream().reduce((long) 0, 
 				(proximo, acumulador) -> proximo + acumulador);
 	}
 	
-	public BigDecimal getTotal(Livro item) {
-		return item.getTotal(getQuantidade(item));
+	public BigDecimal getTotal(LivroQuant item) {
+		return item.getTotal();
 	}
 	
 	public BigDecimal getTotal() {
 		BigDecimal total = BigDecimal.ZERO;
 		
-		for (Livro item : itens.keySet()) {
+		for (LivroQuant item : itens.keySet()) {
 			total = total.add(getTotal(item));
 		}
 		return total ;
 	}
 
 	public void remover(Long produtoId) {
-		Livro produto = new Livro();
+		LivroQuant produto = new LivroQuant();
 		produto.setId(produtoId);
 		this.itens.remove(produto);
 	}
