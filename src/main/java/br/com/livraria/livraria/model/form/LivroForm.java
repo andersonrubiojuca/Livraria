@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import br.com.livraria.livraria.model.LivroDTO;
+import br.com.livraria.livraria.model.Livro;
 
 public class LivroForm {
 
@@ -17,8 +17,8 @@ public class LivroForm {
 	private String dataLancamento;
 	
 	
-	public LivroDTO getLivro() {
-		LivroDTO livro = new LivroDTO();
+	public Livro getLivro() {
+		Livro livro = new Livro();
 		livro.setTitulo(getTitulo());
 		livro.setDescricao(getDescricao());
 		livro.setPaginas(Integer.parseInt(getPaginas()));

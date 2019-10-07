@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.livraria.livraria.infra.FileSaver;
-import br.com.livraria.livraria.model.LivroDTO;
+import br.com.livraria.livraria.model.Livro;
 import br.com.livraria.livraria.model.form.LivroForm;
 import br.com.livraria.livraria.service.LivroService;
 
@@ -34,7 +34,7 @@ public class LivroController {
 	@RequestMapping(value="/form", method=RequestMethod.GET)
 	public String form(Model model) {
 
-		model.addAttribute("livro", new LivroDTO());
+		model.addAttribute("livro", new Livro());
 		
 		return new String("admin/adicionar");
 	}
@@ -47,7 +47,7 @@ public class LivroController {
 							Model model,
 							RedirectAttributes redirectAttributes) throws IOException{
 		
-		LivroDTO livro = livroForm.getLivro();
+		Livro livro = livroForm.getLivro();
 		
 		
 		if(result.hasErrors()) {
