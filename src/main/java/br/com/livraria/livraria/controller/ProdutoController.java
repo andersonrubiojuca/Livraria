@@ -2,6 +2,9 @@ package br.com.livraria.livraria.controller;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.github.jscookie.javacookie.Cookies;
+
 import br.com.livraria.livraria.model.CarrinhoCompras;
+import br.com.livraria.livraria.model.CarrinhoLivros;
 import br.com.livraria.livraria.model.dto.LivroDTO;
 import br.com.livraria.livraria.model.Livro;
 import br.com.livraria.livraria.model.LivroQuant;
@@ -51,6 +57,8 @@ public class ProdutoController {
 		
 		Optional<Livro> livroOp = service.listarPorId(Long.parseLong(livroId));
 		
+		
+		
 		if(livroOp.isPresent()) {
 			LivroQuant livroq = new LivroQuant(livroOp.get());
 			
@@ -71,6 +79,14 @@ public class ProdutoController {
 		model.addAttribute("carrinho", carrinho);
 		
 		return "cliente/itens";
+	}
+	
+	@SuppressWarnings("unused")
+	private void biscoito(HttpServletRequest request, 
+			HttpServletResponse response) {
+		Cookies cookies = Cookies.initFromServlet( request, response );
+		
+		String carrinhol = cookies.get("carrinho");
 	}
 	
 }

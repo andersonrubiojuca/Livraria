@@ -44,4 +44,11 @@ public class CarrinhoLivros implements Serializable{
 	public void setDate(Date date) {
 		this.date = date;
 	}
+
+	/*
+	@Override
+	public String toString() {
+		return "CarrinhoLivros [itens=" + itens + ", date=" + date + "]";
+	}
+	*/
 }
