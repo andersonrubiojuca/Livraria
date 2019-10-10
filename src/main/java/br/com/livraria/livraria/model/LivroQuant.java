@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 public class LivroQuant implements Serializable{
-	
+
 	private static final long serialVersionUID = 1L;
 	
 	private Livro livro;
@@ -46,4 +46,10 @@ public class LivroQuant implements Serializable{
 		bc.multiply(new BigDecimal(this.quantidade));
 		return bc;		
 	}
+	
+	@Override
+	public String toString() {
+		return "LivroQuant [livro=" + livro + ", quantidade=" + quantidade + ", id=" + id + "]";
+	}
+	
 }

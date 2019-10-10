@@ -24,7 +24,7 @@
 				<th>Preços</th> 
 				<th>Páginas</th>
 			</tr>
-			<tr th:each="livro : ${carrinho.itens}">
+			<tr th:each="livro : ${carrinho.itens.livro}">
 				<td><span th:text="${livro.titulo }">Titulo</span></td>
 				<td><span th:text="${livro.descricao }">Descrição</span></td>
 				<td><span th:text="${livro.preco }">Preços</span></td>
