@@ -19,39 +19,39 @@ public class CarrinhoCompras implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private Map<LivroQuant, Long> itens = new LinkedHashMap<>();
+	private Map<Livro, Long> itens = new LinkedHashMap<>();
 	
 
 	private Date date;
 	
-	public Set<LivroQuant> getItens(){
+	public Set<Livro> getItens(){
 		return itens.keySet();
 	}
 	
-	public void add(LivroQuant item) {
+	public void add(Livro item) {
 		itens.put(item, getQuantidade(item) + 1);
 	}
 	
-	public Long getQuantidade(LivroQuant item) {
+	public Long getQuantidade(Livro item) {
 		return this.itens.values().stream().reduce((long) 0, 
 				(proximo, acumulador) -> proximo + acumulador);
 	}
 	
-	public BigDecimal getTotal(LivroQuant item) {
-		return item.getTotal();
+	public BigDecimal getTotal(Livro item) {
+		return item.getTotal(getQuantidade(item));
 	}
 	
 	public BigDecimal getTotal() {
 		BigDecimal total = BigDecimal.ZERO;
 		
-		for (LivroQuant item : itens.keySet()) {
+		for (Livro item : itens.keySet()) {
 			total = total.add(getTotal(item));
 		}
 		return total ;
 	}
 
 	public void remover(Long produtoId) {
-		LivroQuant produto = new LivroQuant();
+		Livro produto = new Livro();
 		produto.setId(produtoId);
 		this.itens.remove(produto);
 	}

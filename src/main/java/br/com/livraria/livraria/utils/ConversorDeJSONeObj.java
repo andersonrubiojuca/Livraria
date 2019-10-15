@@ -1,18 +1,26 @@
 package br.com.livraria.livraria.utils;
 
+import org.jasypt.util.text.TextEncryptor;
+
 import com.google.gson.Gson;
 
 import br.com.livraria.livraria.model.CarrinhoLivros;
 
 public class ConversorDeJSONeObj {
 
-	Gson gson = new Gson();
+	private Gson gson = new Gson();
+	
+	private TextEncryptor textEncryptor;
 	
 	public String toJSON(CarrinhoLivros carrinho) {
-		return gson.toJson(carrinho);
+		String jsonPuro = gson.toJson(carrinho);
+		
+		return textEncryptor.encrypt(jsonPuro);
 	}
 	
 	public CarrinhoLivros toCarrinhoLivros(String json) {
-		return gson.fromJson(json, CarrinhoLivros.class);
+		String jsonCript = json;
+		String deCript = textEncryptor.decrypt(jsonCript);
+		return gson.fromJson(deCript, CarrinhoLivros.class);
 	}
 }

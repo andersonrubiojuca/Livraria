@@ -72,6 +72,12 @@
 		  <artifactId>java-cookie</artifactId>
 		  <version>0.0.2</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.jasypt</groupId>
+		    <artifactId>jasypt</artifactId>
+		    <version>1.9.2</version>
+		</dependency>
+		
 		
 		<!-- Conversor de JSON para objeto (e vice-versa) -->
 		<dependency>
