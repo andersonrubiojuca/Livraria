@@ -16,20 +16,35 @@
 		<h1>Seu Carrinho!</h1>
 		<p th:text="${sucesso}"> sucesso </p>
 		<p th:text="${falha}"> falha </p>
-	
-		<table class="table table-bordered table-striped table-hover">
-			<tr>
-				<th>Título</th>
-				<th>Descrição</th>
-				<th>Preços</th> 
-				<th>Páginas</th>
-			</tr>
-			<tr th:each="livro : ${carrinho.itens}">
-				<td><span th:text="${livro.titulo }">Titulo</span></td>
-				<td><span th:text="${livro.descricao }">Descrição</span></td>
-				<td><span th:text="${livro.preco }">Preços</span></td>
-				<td><span th:text="${livro.paginas }">Páginas</span></td>
-			</tr>
+		
+		
+		<div th:if="${carrinho.itens.empty}">
+			<span>Seu carrinho até o momento está vazio!</span>
+		</div>
+			
+		<table class="table table-bordered table-striped table-hover" th:unless="${carrinho.itens.empty}">
+				<thead>
+					<tr>
+						<th>Título</th>
+						<th>Descrição</th>
+						<th>Páginas</th>
+						<th>Quantidade</th>
+						<th>Preço(s)</th> 
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="livroQuant : ${carrinho.itens}">
+						<td><span th:text="${livroQuant.livro.titulo }">Titulo</span></td>
+						<td><span th:text="${livroQuant.livro.descricao }">Descrição</span></td>
+						<td><span th:text="${livroQuant.livro.paginas }">Páginas</span></td>
+						<td><input type="number" class="form-control" th:value="${livroQuant.quantidade }" name="quantidade" min="1" max="99"></td>
+						<td><span th:text="${livroQuant.livro.preco }">Preços</span></td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<th>Total</th>
+					<th><span th:text="${carrinho.total}">Total</span></th>
+				</tfoot>
 		</table>
 	</div>
 	</section>

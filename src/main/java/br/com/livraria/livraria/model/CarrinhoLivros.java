@@ -5,6 +5,14 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
+
+@Component
+@Scope(value=WebApplicationContext.SCOPE_SESSION, 
+				proxyMode=ScopedProxyMode.TARGET_CLASS)
 public class CarrinhoLivros implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -16,12 +24,16 @@ public class CarrinhoLivros implements Serializable{
 	public void add(LivroQuant livroq) {
 		itens.add(livroq);
 	}
+	
+	public ArrayList<LivroQuant> getItens(){
+		return itens;
+	}
 
 	public BigDecimal getTotal() {
 		BigDecimal bc = new BigDecimal("0");
 		
 		for(LivroQuant livroq : itens) {
-			bc.add(livroq.getTotal());
+			bc = bc.add(livroq.getTotal());
 		}
 		
 		return bc;
@@ -43,12 +55,6 @@ public class CarrinhoLivros implements Serializable{
 	
 	public void setDate(Date date) {
 		this.date = date;
-	}
-
-	
-	@Override
-	public String toString() {
-		return "CarrinhoLivros [itens=" + itens + ", date=" + date + "]";
 	}
 	
 }

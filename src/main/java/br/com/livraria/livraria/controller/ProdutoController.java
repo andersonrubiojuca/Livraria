@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.livraria.livraria.model.CarrinhoCompras;
+import br.com.livraria.livraria.model.CarrinhoLivros;
 import br.com.livraria.livraria.model.dto.LivroDTO;
 import br.com.livraria.livraria.model.Livro;
+import br.com.livraria.livraria.model.LivroQuant;
 import br.com.livraria.livraria.service.LivroService;
 
 @Controller
@@ -27,7 +28,7 @@ public class ProdutoController {
 	
 	
 	@Autowired
-	private CarrinhoCompras carrinho;
+	private CarrinhoLivros carrinho;
 	
 
 	@RequestMapping(value="/detalhes/{id}", method=RequestMethod.GET)
@@ -58,11 +59,12 @@ public class ProdutoController {
 		
 		
 		if(livroOp.isPresent()) {
-			Livro livroq = livroOp.get();
+			LivroQuant livroq = new LivroQuant(livroOp.get());
 			
 			carrinho.add(livroq);
 			
 			model.addAttribute("carrinho", carrinho);
+			
 			
 			return "redirect:/carrinho";
 			
@@ -79,6 +81,8 @@ public class ProdutoController {
 			HttpServletResponse response) {
 		
 		model.addAttribute("carrinho", carrinho);
+		
+		System.out.println(carrinho.getTotal());
 		
 		return "cliente/itens";
 	}
