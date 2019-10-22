@@ -3,27 +3,29 @@ package br.com.livraria.livraria.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import br.com.livraria.livraria.model.dto.LivroDTO;
+
 public class LivroQuant implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private Livro livro;
+	private LivroDTO livro;
 	private short quantidade;
 	private Long id;
 	
 
 	public LivroQuant(Livro livro) {
-		this.livro = livro;
 		this.id = livro.getId();
+		this.livro = new LivroDTO(livro);
 		this.quantidade = 1;
 	}
 	
 	public LivroQuant() {}
 	
-	public Livro getLivro() {
+	public LivroDTO getLivro() {
 		return livro;
 	}
-	public void setLivro(Livro livro) {
+	public void setLivro(LivroDTO livro) {
 		this.livro = livro;
 	}
 	public short getQuantidade() {
@@ -42,7 +44,7 @@ public class LivroQuant implements Serializable{
 	}
 	
 	public BigDecimal getTotal() {
-		BigDecimal bc = new BigDecimal(this.livro.getPreco());
+		BigDecimal bc = new BigDecimal(this.livro.getPrecoRaw());
 		bc.multiply(new BigDecimal(this.quantidade));
 		return bc;		
 	}

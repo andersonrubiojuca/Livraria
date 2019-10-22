@@ -6,6 +6,7 @@
 	<title>Livraria Assis - Seus Itens</title>
 	<link th:href="@{../css/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
 	<link th:href="@{../css/main.css}" rel="stylesheet" />
+	<link th:href="@{../css/sacola.css}" rel="stylesheet" />
 </head>
 <body>
 	<div th:insert="~{fragment/main :: menu}" class="header"></div>
@@ -28,8 +29,9 @@
 						<th>Título</th>
 						<th>Descrição</th>
 						<th>Páginas</th>
-						<th>Quantidade</th>
-						<th>Preço(s)</th> 
+						<th class="th-esp">Quantidade</th>
+						<th>Capa</th>
+						<th class="th-esp">Preço(s)</th> 
 					</tr>
 				</thead>
 				<tbody>
@@ -37,13 +39,20 @@
 						<td><span th:text="${livroQuant.livro.titulo }">Titulo</span></td>
 						<td><span th:text="${livroQuant.livro.descricao }">Descrição</span></td>
 						<td><span th:text="${livroQuant.livro.paginas }">Páginas</span></td>
-						<td><input type="number" class="form-control" th:value="${livroQuant.quantidade }" name="quantidade" min="1" max="99"></td>
+						<td><input type="number" class="form-control input-quantidade" th:value="${livroQuant.quantidade }" name="quantidade" min="1" max="99"></td>
+						<td><img class="capas" th:src="${'img/capa/' + livroQuant.livro.sumarioPath}"></td>
 						<td><span th:text="${livroQuant.livro.preco }">Preços</span></td>
 					</tr>
 				</tbody>
 				<tfoot>
-					<th>Total</th>
-					<th><span th:text="${carrinho.total}">Total</span></th>
+					<tr>
+						<th class="th-vazio"></th>
+						<th class="th-vazio"></th>
+						<th class="th-vazio"></th>
+						<th class="th-vazio"></th>
+						<th>Total</th>
+						<th><span th:text="${carrinho.total}">Total</span></th>
+					</tr>
 				</tfoot>
 		</table>
 	</div>

@@ -82,8 +82,6 @@ public class ProdutoController {
 		
 		model.addAttribute("carrinho", carrinho);
 		
-		System.out.println(carrinho.getTotal());
-		
 		return "cliente/itens";
 	}
 	

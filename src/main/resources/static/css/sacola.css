@@ -1,0 +1,11 @@
+.input-quantidade{
+	width: 60%;
+}
+
+.th-esp{
+	width: 15%;
+}
+
+tfoot .th-vazio {
+	border: 0;
+}

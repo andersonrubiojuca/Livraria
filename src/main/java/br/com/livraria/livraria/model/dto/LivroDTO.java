@@ -16,6 +16,7 @@ public class LivroDTO {
 	private String paginas;
 	private String dataLancamento;
 	private String preco;
+	private double precoRaw;
 	private String sumarioPath;
 	
 	
@@ -28,6 +29,7 @@ public class LivroDTO {
 		this.paginas = "" + livro.getPaginas();
 		this.dataLancamento = dataLiquida(livro.getDataLancamento());
 		this.preco = moeda(livro.getPreco());
+		this.precoRaw = livro.getPreco();
 		
 		if(livro.getSumarioPath() == null) 
 			this.sumarioPath = generico;
@@ -64,6 +66,11 @@ public class LivroDTO {
 	public String getPreco() {
 		return preco;
 	}
+	
+	public double getPrecoRaw() {
+		return precoRaw;
+	}
+	
 	public String getSumarioPath() {
 		return sumarioPath;
 	}

@@ -2,8 +2,10 @@ package br.com.livraria.livraria.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -29,14 +31,14 @@ public class CarrinhoLivros implements Serializable{
 		return itens;
 	}
 
-	public BigDecimal getTotal() {
+	public String getTotal() {
 		BigDecimal bc = new BigDecimal("0");
 		
 		for(LivroQuant livroq : itens) {
 			bc = bc.add(livroq.getTotal());
 		}
 		
-		return bc;
+		return NumberFormat.getCurrencyInstance(new Locale("pt", "br")).format(bc);
 	}
 	
 	public void remover(Long produtoId) {
