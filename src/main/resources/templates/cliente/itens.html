@@ -29,34 +29,46 @@
 						<th>Título</th>
 						<th>Descrição</th>
 						<th>Páginas</th>
-						<th class="th-esp">Quantidade</th>
 						<th>Capa</th>
-						<th class="th-esp">Preço(s)</th> 
+						<th>Remover</th> 
+						<th class="th-esp">Preço(s)</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="livroQuant : ${carrinho.itens}">
-						<td><span th:text="${livroQuant.livro.titulo }">Titulo</span></td>
-						<td><span th:text="${livroQuant.livro.descricao }">Descrição</span></td>
-						<td><span th:text="${livroQuant.livro.paginas }">Páginas</span></td>
-						<td><input type="number" class="form-control input-quantidade" th:value="${livroQuant.quantidade }" name="quantidade" min="1" max="99"></td>
-						<td><img class="capas" th:src="${'img/capa/' + livroQuant.livro.sumarioPath}"></td>
-						<td><span th:text="${livroQuant.livro.preco }">Preços</span></td>
+					<tr th:each="livro : ${carrinho.itens}">
+						<td><span th:text="${livro.titulo }">Titulo</span></td>
+						<td><span th:text="${livro.descricao }">Descrição</span></td>
+						<td><span th:text="${livro.paginas }">Páginas</span></td>
+						<td><img class="capas" th:src="${'img/capa/' + livro.sumarioPath}"></td>
+						<td>
+							<input type="hidden" name="id" id="id" th:value="${livro.id}">
+							<a th:href="${'remover/' + livro.id}"><img class="img-remover" th:src="@{../img/remover.png}"></a>
+						</td>
+						<td><span th:text="${livro.preco }" class="td-preco">Preços</span></td>
 					</tr>
 				</tbody>
 				<tfoot>
 					<tr>
-						<th class="th-vazio"></th>
-						<th class="th-vazio"></th>
-						<th class="th-vazio"></th>
-						<th class="th-vazio"></th>
-						<th>Total</th>
+						<th colspan="5">Total</th>
 						<th><span th:text="${carrinho.total}">Total</span></th>
 					</tr>
 				</tfoot>
 		</table>
 	</div>
+		<section class="container finalizar" th:unless="${carrinho.itens.empty}">
+			<div class="row">
+				<div class="col-sm">
+					<a th:href="@{limpar}"><button class="btn btn-secondary icon-basket-alt" title="Remover Todos">Remover Todos</button></a>
+				</div>
+				<div class="col-sm">
+					<form action="finalizar" method="post">
+						<input type="submit" class="btn submit-image btn-finalizar" name="finalizar" value="Finalizar compra" />
+					</form>
+				</div>
+			</div>	
+		</section>
 	</section>
+	
 	
 	<div class="footer" th:insert="~{fragment/main :: footer}"></div>
 </body>

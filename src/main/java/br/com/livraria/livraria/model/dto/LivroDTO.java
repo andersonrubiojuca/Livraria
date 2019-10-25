@@ -2,8 +2,10 @@ package br.com.livraria.livraria.model.dto;
 
 import java.text.DateFormat;
 import java.text.NumberFormat;
+//import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+//import java.util.Locale;
 import java.util.Locale;
 
 import br.com.livraria.livraria.model.Livro;
@@ -38,6 +40,10 @@ public class LivroDTO {
 		
 	}
 	
+	public LivroDTO(Long produtoId) {
+		this.id = produtoId;
+	}
+
 	private String dataLiquida(Calendar cal) {
 		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		
@@ -46,9 +52,11 @@ public class LivroDTO {
 		return data;
 	}
 	
+	
 	private String moeda(double moeda) {
 		return NumberFormat.getCurrencyInstance(new Locale("pt", "br")).format(moeda);
 	}
+	
 	
 	
 	public String getTitulo() {
@@ -77,5 +85,14 @@ public class LivroDTO {
 	public Long getId() {
 		return id;
 	}
+
+	@Override
+	public String toString() {
+		return "LivroDTO [id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", paginas=" + paginas
+				+ ", dataLancamento=" + dataLancamento + ", preco=" + preco + ", precoRaw=" + precoRaw
+				+ ", sumarioPath=" + sumarioPath + ", generico=" + generico + "]";
+	}
+	
+	
 	
 }

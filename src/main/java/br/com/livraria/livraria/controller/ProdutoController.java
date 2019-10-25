@@ -17,7 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.livraria.livraria.model.CarrinhoLivros;
 import br.com.livraria.livraria.model.dto.LivroDTO;
 import br.com.livraria.livraria.model.Livro;
-import br.com.livraria.livraria.model.LivroQuant;
 import br.com.livraria.livraria.service.LivroService;
 
 @Controller
@@ -29,6 +28,7 @@ public class ProdutoController {
 	
 	@Autowired
 	private CarrinhoLivros carrinho;
+	
 	
 
 	@RequestMapping(value="/detalhes/{id}", method=RequestMethod.GET)
@@ -59,9 +59,10 @@ public class ProdutoController {
 		
 		
 		if(livroOp.isPresent()) {
-			LivroQuant livroq = new LivroQuant(livroOp.get());
+			LivroDTO livro = new LivroDTO(livroOp.get());
 			
-			carrinho.add(livroq);
+			carrinho.add(livro);
+			
 			
 			model.addAttribute("carrinho", carrinho);
 			
@@ -85,5 +86,31 @@ public class ProdutoController {
 		return "cliente/itens";
 	}
 	
+	@RequestMapping(value="/limpar")
+	public String limpar(Model model) {
+		
+		carrinho.limpa();
+		model.addAttribute("carrinho", carrinho);
+		
+		return "redirect:/carrinho";
+	}
 	
+	@RequestMapping(value="/finalizar")
+	public String finalizar(Model model) {
+		
+		model.addAttribute("carrinho", carrinho);
+		
+		return "cliente/finalizar";
+	}
+	
+	@RequestMapping(value="/remover/{id}")
+	public String remover(Model model,
+			@PathVariable("id") String id) {
+		
+		carrinho.remover(Long.parseLong(id));
+		
+		model.addAttribute("carrinho", carrinho);
+		
+		return "redirect:/carrinho";
+	}
 }
