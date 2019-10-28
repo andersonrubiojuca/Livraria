@@ -107,7 +107,7 @@ public class ProdutoController {
 	public String remover(Model model,
 			@PathVariable("id") String id) {
 		
-		carrinho.remover(Long.parseLong(id));
+		carrinho.remover(Integer.parseInt(id));
 		
 		model.addAttribute("carrinho", carrinho);
 		

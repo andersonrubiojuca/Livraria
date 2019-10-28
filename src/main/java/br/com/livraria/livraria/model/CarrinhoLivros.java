@@ -43,10 +43,8 @@ public class CarrinhoLivros implements Serializable{
 		return NumberFormat.getCurrencyInstance(new Locale("pt", "br")).format(bc);
 	}
 	
-	//mecher nisso
-	public void remover(Long produtoId) {
-		LivroDTO produto = new LivroDTO(produtoId);
-		itens.remove(0);
+	public void remover(int posicao) {
+		itens.remove(posicao);
 	}
 	
 	public void limpa() {

@@ -35,14 +35,14 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="livro : ${carrinho.itens}">
+					<tr th:each="livro, iter : ${carrinho.itens}">
 						<td><span th:text="${livro.titulo }">Titulo</span></td>
 						<td><span th:text="${livro.descricao }">Descrição</span></td>
 						<td><span th:text="${livro.paginas }">Páginas</span></td>
 						<td><img class="capas" th:src="${'img/capa/' + livro.sumarioPath}"></td>
 						<td>
 							<input type="hidden" name="id" id="id" th:value="${livro.id}">
-							<a th:href="${'remover/' + livro.id}"><img class="img-remover" th:src="@{../img/remover.png}"></a>
+							<a th:href="${'remover/' + iter.index}"><img class="img-remover" th:src="@{../img/remover.png}"></a>
 						</td>
 						<td><span th:text="${livro.preco }" class="td-preco">Preços</span></td>
 					</tr>
