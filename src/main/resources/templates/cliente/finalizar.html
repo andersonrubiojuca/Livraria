@@ -6,57 +6,81 @@
 	<title>Livraria Assis - Finalizando Compra</title>
 	<link th:href="@{../css/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
 	<link th:href="@{../css/main.css}" rel="stylesheet" />
+	<link th:href="@{../css/finalizar.css}" rel="stylesheet" />
 </head>
 <body>
 	<div th:insert="~{fragment/main :: menu}" class="header"></div>
 	
-	<section class="jumbotron jumbotron-fluid">
+	<section class="container">
+		<div class="col-lg-12">
+			<h2 class="titulo-finalizar">Preencha seus dados antes de finalizar a Compra.</h2>
+			<form method="post" action="#" id="finalizar">
+				<div class="row">
+					<div class="form-group col-lg">
+						<label for="nome">Nome</label>
+						<input class="form-control" type="text" name="nome" id="nome" autofocus placeholder="Nome Completo" required/>
+					</div>
+					<div class="form-group col-lg">
+						<label for="email">E-mail</label>
+						<input class="form-control" type="email" name="email" id="email" placeholder="E-mail" required/>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-lg">
+						<label for="conta">Conta Corrente</label>
+						<input class="form-control conta-corrente" type="text" name="conta" id="conta" placeholder="Conta" maxlength="9" required/>
+					</div>
+					<div class="form-group col-lg">
+						<label for="agencia">Agência</label>
+						<input class="form-control" type="text" name="agencia" id="agencia" placeholder="Agência" maxlength="4"  required/>
+					</div>
+					<div class="form-group col-lg">
+						<label for="banco">Banco</label>
+						<select name="banco" id="banco" class="form-control"  required>
+		                    <option value=""> </option>
+		                    <option value="0">Banco do Brasil</option>
+		                    <option value="1">Bradesco</option>
+		                    <option value="2">Caixa</option>
+		                    <option value="3">Citibank</option>
+		                    <option value="4">Itaú</option>
+		                    <option value="5">Santander</option>
+		                </select>
+					</div>
+				</div>
+					<button class="btn btn-primary" type="submit">Finalizar Compra</button>
+				</form>
+			</div>	
 	
-		<table class="table table-bordered table-striped table-hover" th:unless="${carrinho.itens.empty}">
-			<thead>
-				<tr>
-					<th>Título</th>
-					<th>Descrição</th>
-					<th>Páginas</th>
-					<th>Capa</th>
-					<th class="th-esp">Preço(s)</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="livro, iter : ${carrinho.itens}">
-					<td><span th:text="${livro.titulo }">Titulo</span></td>
-					<td><span th:text="${livro.descricao }">Descrição</span></td>
-					<td><span th:text="${livro.paginas }">Páginas</span></td>
-					<td><img class="capas" th:src="${'img/capa/' + livro.sumarioPath}"></td>
-					<td><span th:text="${livro.preco }" class="td-preco">Preços</span></td>
-				</tr>
-			</tbody>
-			<tfoot>
-				<tr>
-					<th colspan="4">Total</th>
-					<th><span th:text="${carrinho.total}">Total</span></th>
-				</tr>
-			</tfoot>
-		</table>
-	</section>
-	
-	<!-- mecher amanhã -->
-	<form method="post" jsf:id="formCheckout">
-			<div class="form-group">
-				<label>Nome</label>
-				<input class="form-control" type="text" autofocus="autofocus" placeholder="Nome Completo" jsf:value="#{checkoutBean.usuario.nome}" />
-			</div>
-			<div class="form-group">
-				<label>E-mail</label>
-				<input class="form-control" type="email" placeholder="E-mail" jsf:value="#{checkoutBean.usuario.email}" />
-			</div>
-			<div class="form-group">
-				<label>Senha</label>
-				<input class="form-control" type="password" placeholder="Senha" jsf:value="#{checkoutBean.usuario.senha}" />
-			</div>
-			<button class="btn btn-primary" type="submit" jsf:action="#{checkoutBean.finalizar}">Finalizar Compra</button>
-		</form>
+			<table class="table table-bordered table-striped table-hover" th:unless="${carrinho.itens.empty}">
+				<thead>
+					<tr>
+						<th>Título</th>
+						<th>Descrição</th>
+						<th>Páginas</th>
+						<th>Capa</th>
+						<th class="th-esp">Preço(s)</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="livro : ${carrinho.itens}">
+						<td><span th:text="${livro.titulo }">Titulo</span></td>
+						<td><span th:text="${livro.descricao }">Descrição</span></td>
+						<td><span th:text="${livro.paginas }">Páginas</span></td>
+						<td><img class="capas" th:src="${'img/capa/' + livro.sumarioPath}"></td>
+						<td><span th:text="${livro.preco }" class="td-preco">Preços</span></td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th colspan="4">Total</th>
+						<th><span th:text="${carrinho.total}">Total</span></th>
+					</tr>
+				</tfoot>
+			</table>
+		</section>
 	
 	<div th:insert="~{fragment/main :: footer}" class="header"></div>
+	<script type="text/javascript" th:src="@{js/jquery.maskedinput.min.js}"></script>
+	<script type="text/javascript" th:src="@{js/finalizar.js}"></script>
 </body>
 </html>
