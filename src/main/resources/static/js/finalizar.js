@@ -1,3 +1,3 @@
 jQuery(function($){
-	$('.conta-corrente').mask("0000000-0");
+	$('.conta-corrente').mask("9999999-9");
 });

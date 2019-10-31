@@ -98,9 +98,15 @@ public class ProdutoController {
 	@RequestMapping(value="/finalizar")
 	public String finalizar(Model model) {
 		
-		model.addAttribute("carrinho", carrinho);
+		if(carrinho.getItens().isEmpty()) {
+			return "redirect:/";
+		} else {
+			
+			model.addAttribute("carrinho", carrinho);
+			
+			return "cliente/finalizar";
+		}
 		
-		return "cliente/finalizar";
 	}
 	
 	@RequestMapping(value="/remover/{id}")
@@ -112,5 +118,11 @@ public class ProdutoController {
 		model.addAttribute("carrinho", carrinho);
 		
 		return "redirect:/carrinho";
+	}
+	
+	//mecher depois
+	@RequestMapping(value="/terminado", method=RequestMethod.POST)
+	public String terminado(Model model) {
+		return "redirect:/";
 	}
 }
