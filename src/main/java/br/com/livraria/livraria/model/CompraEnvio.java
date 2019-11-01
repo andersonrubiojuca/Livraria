@@ -2,6 +2,7 @@ package br.com.livraria.livraria.model;
 
 import com.google.gson.Gson;
 
+
 public class CompraEnvio {
 	
 	private String nome;
@@ -10,6 +11,16 @@ public class CompraEnvio {
 	private String agencia;
 	private Banco banco;
 	private CarrinhoLivros carrinho;
+	
+	public Compras getCompra() {
+		Compras compra = new Compras();
+		
+		compra.setNome(nome);
+		compra.setEmail(email);
+		compra.setCarrinho(carrinho);
+		
+		return compra;
+	}
 	
 	public String toJson() {
 		Gson gson = new Gson();

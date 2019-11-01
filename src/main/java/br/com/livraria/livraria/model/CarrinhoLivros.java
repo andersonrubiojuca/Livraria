@@ -2,9 +2,9 @@ package br.com.livraria.livraria.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Locale;
 
 import org.springframework.context.annotation.Scope;

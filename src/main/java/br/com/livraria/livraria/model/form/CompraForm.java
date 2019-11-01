@@ -59,4 +59,11 @@ public class CompraForm {
 	public void setBanco(String banco) {
 		this.banco = banco;
 	}
+
+	@Override
+	public String toString() {
+		return "CompraForm [nome=" + nome + ", email=" + email + ", conta=" + conta + ", agencia=" + agencia
+				+ ", banco=" + banco + "]";
+	}
+	
 }
