@@ -7,6 +7,14 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
@@ -14,6 +22,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import br.com.livraria.livraria.model.dto.LivroDTO;
 
+@Entity
+@Table(name = "carrinho")
 @Component
 @Scope(value=WebApplicationContext.SCOPE_SESSION, 
 				proxyMode=ScopedProxyMode.TARGET_CLASS)
@@ -24,6 +34,13 @@ public class CarrinhoLivros implements Serializable{
 	private ArrayList<LivroDTO> itens = new ArrayList<>();
 	
 	private Date date;
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+	
+	@OneToOne(mappedBy = "carrinho", fetch = FetchType.EAGER)
+	private Compras compras;
 
 	public void add(LivroDTO livroq) {
 		itens.add(livroq);
@@ -57,6 +74,31 @@ public class CarrinhoLivros implements Serializable{
 	
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	
+
+	public Compras getCompras() {
+		return compras;
+	}
+
+	public void setCompras(Compras compras) {
+		this.compras = compras;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public void setItens(ArrayList<LivroDTO> itens) {
+		this.itens = itens;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	@Override

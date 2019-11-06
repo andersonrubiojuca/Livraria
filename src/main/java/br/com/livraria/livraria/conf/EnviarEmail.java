@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 
 import br.com.livraria.livraria.model.CompraEnvio;
 
-//mecher mais tarde
 @Component
 public class EnviarEmail{
 

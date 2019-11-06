@@ -2,17 +2,22 @@ package br.com.livraria.livraria.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  * 
  * @author Anderson
- * Este recurso eu não trabalharei a fundo, pois não é o objetovo do projeto, somente o manterei no BD
+ * Este recurso eu não trabalharei a fundo, pois não é o objetivo do projeto, somente o manterei no BD
  */
 @Entity
+@Table(name = "compras")
 public class Compras implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -22,6 +27,9 @@ public class Compras implements Serializable{
 	
 	private String nome;
 	private String email;
+	
+	@OneToOne(cascade= CascadeType.ALL)
+	@JoinColumn(name = "carrinho_id", referencedColumnName="id")
 	private CarrinhoLivros carrinho;
 	
 	
