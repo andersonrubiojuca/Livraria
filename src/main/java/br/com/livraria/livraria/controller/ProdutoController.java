@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.Calendar;
 import java.util.Optional;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.livraria.livraria.conf.EnviarEmail;
 import br.com.livraria.livraria.model.CarrinhoLivros;
 import br.com.livraria.livraria.model.CompraEnvio;
 import br.com.livraria.livraria.model.Compras;
@@ -150,6 +152,16 @@ public class ProdutoController {
 		Compras compras = compraEnvio.getCompra();
 		compraService.salvar(compras);
 		
+		EnviarEmail enviar = new EnviarEmail();
+		
+		try {
+			enviar.enviar(compraEnvio);
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		carrinho.limpa();
 		redirectAttributes.addFlashAttribute("msg_resultado", "Compra feita! "
 				+ "Aguarde o email e o prazo de entrega.");
 		
