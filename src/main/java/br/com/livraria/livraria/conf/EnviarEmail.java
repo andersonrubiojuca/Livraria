@@ -2,7 +2,10 @@ package br.com.livraria.livraria.conf;
 
 import java.util.Properties;
 
+import javax.mail.Authenticator;
 import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +24,26 @@ public class EnviarEmail{
 	private JavaMailSender sender;
 	
 	public void enviar(CompraEnvio compraEnvio) throws MessagingException {
-		MimeMessage message = sender.createMimeMessage();
+		Properties props = new Properties();
+	    props.put("mail.transport.protocol", "smtp");
+	    props.put("mail.smtp.auth", "true");
+	    props.put("mail.smtp.starttls.enable", "true");
+	    props.put("mail.debug", "true");
+	    
+	    Session session = Session.getInstance(props, new Authenticator() {
+	    	protected PasswordAuthentication getPasswordAuthentication() {
+	    		return new PasswordAuthentication("jucaanderson66@gmail.com", "uDR3YUn69RZwcFg");
+	    	}
+	    });
+		
+		MimeMessage message = new MimeMessage(session);
 		
 		MimeMessageHelper helper = new MimeMessageHelper(message, true);
 		
 		helper.setTo(compraEnvio.getEmail());
+		helper.setSubject("Compra finalizada com sucesso!");
+		
+		sender = getJavaMailSender();
 		
 		sender.send(message);
 	}

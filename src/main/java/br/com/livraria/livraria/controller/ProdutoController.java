@@ -157,7 +157,6 @@ public class ProdutoController {
 		try {
 			enviar.enviar(compraEnvio);
 		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
