@@ -14,15 +14,30 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import br.com.livraria.livraria.model.CompraEnvio;
 
-@Component
+@Service
 public class EnviarEmail{
 
 	@Autowired
 	private JavaMailSender sender;
 	
+	
+	public void enviar(CompraEnvio compraEnvio) throws MessagingException{
+		MimeMessage message = sender.createMimeMessage();
+		message.setContent("", "text/html; charset=utf-8");
+		
+		MimeMessageHelper helper = new MimeMessageHelper(message, true);
+		
+		helper.setTo(compraEnvio.getEmail());
+		helper.setSubject("Compra finalizada com sucesso!");
+		
+		sender.send(message);
+	}
+	
+	/*
 	public void enviar(CompraEnvio compraEnvio) throws MessagingException {
 		Properties props = new Properties();
 	    props.put("mail.transport.protocol", "smtp");
@@ -47,6 +62,7 @@ public class EnviarEmail{
 		
 		sender.send(message);
 	}
+	*/
 	
 	@Bean
 	public JavaMailSender getJavaMailSender() {

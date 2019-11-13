@@ -152,19 +152,28 @@ public class ProdutoController {
 		Compras compras = compraEnvio.getCompra();
 		compraService.salvar(compras);
 		
-		EnviarEmail enviar = new EnviarEmail();
 		
-		try {
-			enviar.enviar(compraEnvio);
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		}
+		enviaEmail(compraEnvio);
 		
 		carrinho.limpa();
 		redirectAttributes.addFlashAttribute("msg_resultado", "Compra feita! "
 				+ "Aguarde o email e o prazo de entrega.");
 		
 		return "redirect:/";
+	}
+	
+	private void enviaEmail(CompraEnvio compraEnvio) {
+		EnviarEmail enviar = new EnviarEmail();
+		
+		new Thread(new Runnable() {
+			public void run() {
+				try {
+					enviar.enviar(compraEnvio);					
+				} catch (MessagingException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
 	}
 	
 	private Date getAgora() {
