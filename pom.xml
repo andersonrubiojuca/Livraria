@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>br.com.livraria</groupId>
 	<artifactId>livraria</artifactId>
-	<version>0.1.25</version>
+	<version>0.1.27</version>
 	<name>livraria</name>
 	<description>Projeto de uma livraria</description>
 

@@ -1,4 +1,7 @@
 
+.mdl-list li{
+	list-style-type: none;
+}
 
 .lista-livros {
 

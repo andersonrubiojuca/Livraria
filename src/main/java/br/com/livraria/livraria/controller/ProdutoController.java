@@ -1,10 +1,10 @@
 package br.com.livraria.livraria.controller;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Optional;
 
-import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -19,8 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.livraria.livraria.conf.EnviarEmail;
+import br.com.livraria.livraria.conf.email.EnviarEmail;
 import br.com.livraria.livraria.model.CarrinhoLivros;
+import br.com.livraria.livraria.model.CarrinhoLivrosEmail;
 import br.com.livraria.livraria.model.CompraEnvio;
 import br.com.livraria.livraria.model.Compras;
 import br.com.livraria.livraria.model.dto.LivroDTO;
@@ -147,17 +148,19 @@ public class ProdutoController {
 		
 		CompraEnvio compraEnvio = compraForm.getCompra();
 		carrinho.setDate(getAgora());
-		compraEnvio.setCarrinho(carrinho);
+		CarrinhoLivrosEmail carrinhoEmail = new CarrinhoLivrosEmail(carrinho);
+		
+		compraEnvio.setCarrinho(carrinhoEmail);
 		
 		Compras compras = compraEnvio.getCompra();
-		compraService.salvar(compras);
+		//compraService.salvar(compras);
 		
 		
-		enviaEmail(compraEnvio);
+		//enviaEmail(compraEnvio);
 		
 		carrinho.limpa();
 		redirectAttributes.addFlashAttribute("msg_resultado", "Compra feita! "
-				+ "Aguarde o email e o prazo de entrega.");
+				+ "Aguarde o email.");
 		
 		return "redirect:/";
 	}
@@ -167,11 +170,7 @@ public class ProdutoController {
 		
 		new Thread(new Runnable() {
 			public void run() {
-				try {
-					enviar.enviar(compraEnvio);					
-				} catch (MessagingException e) {
-					e.printStackTrace();
-				}
+				enviar.enviar(compraEnvio);
 			}
 		}).start();
 	}
@@ -179,8 +178,6 @@ public class ProdutoController {
 	private Date getAgora() {
 		Calendar cal = Calendar.getInstance();
 		Date date = new Date(cal.getTimeInMillis());
-				
-		System.out.println(date);
 		
 		return date;
 	}

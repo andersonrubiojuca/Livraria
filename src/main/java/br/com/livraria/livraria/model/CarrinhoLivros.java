@@ -29,18 +29,18 @@ import br.com.livraria.livraria.model.dto.LivroDTO;
 				proxyMode=ScopedProxyMode.TARGET_CLASS)
 public class CarrinhoLivros implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+	protected static final long serialVersionUID = 1L;
 	
-	private ArrayList<LivroDTO> itens = new ArrayList<>();
+	protected ArrayList<LivroDTO> itens = new ArrayList<>();
 	
-	private Date date;
+	protected Date date;
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	protected Long id;
 	
 	@OneToOne(mappedBy = "carrinho", fetch = FetchType.EAGER)
-	private Compras compras;
+	protected Compras compras;
 
 	public void add(LivroDTO livroq) {
 		itens.add(livroq);

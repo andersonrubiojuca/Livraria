@@ -1,3 +1,7 @@
+.mdl-list li{
+	list-style-type: none;
+}
+
 .capas{
 	max-width: 80px;
 }
