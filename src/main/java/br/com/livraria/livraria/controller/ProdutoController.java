@@ -21,7 +21,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.livraria.livraria.conf.email.EnviarEmail;
 import br.com.livraria.livraria.model.CarrinhoLivros;
-import br.com.livraria.livraria.model.CarrinhoLivrosEmail;
 import br.com.livraria.livraria.model.CompraEnvio;
 import br.com.livraria.livraria.model.Compras;
 import br.com.livraria.livraria.model.dto.LivroDTO;
@@ -148,15 +147,14 @@ public class ProdutoController {
 		
 		CompraEnvio compraEnvio = compraForm.getCompra();
 		carrinho.setDate(getAgora());
-		CarrinhoLivrosEmail carrinhoEmail = new CarrinhoLivrosEmail(carrinho);
 		
-		compraEnvio.setCarrinho(carrinhoEmail);
+		compraEnvio.setCarrinho(carrinho);
 		
 		Compras compras = compraEnvio.getCompra();
 		//compraService.salvar(compras);
 		
 		
-		//enviaEmail(compraEnvio);
+		enviaEmail(compraEnvio);
 		
 		carrinho.limpa();
 		redirectAttributes.addFlashAttribute("msg_resultado", "Compra feita! "
@@ -168,11 +166,14 @@ public class ProdutoController {
 	private void enviaEmail(CompraEnvio compraEnvio) {
 		EnviarEmail enviar = new EnviarEmail();
 		
+		CompraEnvio enviarCompra = compraEnvio;
+		
 		new Thread(new Runnable() {
 			public void run() {
-				enviar.enviar(compraEnvio);
+				enviar.enviar(enviarCompra);
 			}
 		}).start();
+		
 	}
 	
 	private Date getAgora() {

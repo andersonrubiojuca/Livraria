@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
+
 import org.springframework.web.context.WebApplicationContext;
 
 import br.com.livraria.livraria.model.dto.LivroDTO;
