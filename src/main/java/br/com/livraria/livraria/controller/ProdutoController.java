@@ -168,11 +168,8 @@ public class ProdutoController {
 		
 		CompraEnvio enviarCompra = compraEnvio;
 		
-		new Thread(new Runnable() {
-			public void run() {
-				enviar.enviar(enviarCompra);
-			}
-		}).start();
+		enviar.enviar(enviarCompra);
+		
 		
 	}
 	

@@ -52,7 +52,16 @@ public class EnviarEmail{
 	    	
 	    	message.setContent(conteudo, "text/html; charset=utf-8");
 	    	
-	    	Transport.send(message);
+	    	new Thread(new Runnable() {
+				public void run() {
+					try {
+						Transport.send(message);
+					} catch (MessagingException e) {
+						e.printStackTrace();
+					}
+				}
+			}).start();
+	    	
 	    	
 	    	System.out.println("Deu certo!");
 	    } catch (MessagingException e) {
