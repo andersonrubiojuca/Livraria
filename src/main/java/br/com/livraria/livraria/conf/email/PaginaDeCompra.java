@@ -1,11 +1,12 @@
 package br.com.livraria.livraria.conf.email;
 
 import br.com.livraria.livraria.model.CarrinhoLivros;
+import br.com.livraria.livraria.model.CompraEnvio;
 import br.com.livraria.livraria.model.dto.LivroDTO;
 
 public class PaginaDeCompra {
 	
-	public String email(CarrinhoLivros carrinho) {
+	public String email(CompraEnvio compraEnvio) {
 		return "<!DOCTYPE html>\r\n" + 
 				"<html>\r\n" + 
 				"	<head>\r\n" + 
@@ -49,15 +50,15 @@ public class PaginaDeCompra {
 				"	<body>\r\n" + 
 				"		<header>\r\n" + 
 				"			<img src=\"https://i.imgur.com/hEUywDB.jpg\" class=\"capa\">\r\n" + 
-				"			<h2>Compra feita com sucesso!</h2>\r\n" + 
+				"			<h2>Olá " + compraEnvio.getNome() + "</h2>\r\n" + 
 				"		</header>\r\n" + 
 				"		<section>\r\n" + 
 				"			<br>\r\n" + 
-				"			<span>Parabéns por ter feito em nossa livraria, esperamos que você \r\n" + 
+				"			<span>Parabéns por ter comprado em nossa livraria, esperamos que você \r\n" + 
 				"				desfrute de um bom material de estudo.</span>\r\n" + 
 				"			<br>\r\n" + 
 				"			<span>Dados da compra:</span>\r\n" + 
-							 tabela(carrinho) +
+							 tabela(compraEnvio.getCarrinho()) +
 				"		</section>\r\n" + 
 				"		<footer class=\"footer\">\r\n" + 
 				"			<div class=\"footer-copyright text-center py-3\">© 2019 Copyright:\r\n" + 
@@ -98,10 +99,15 @@ public class PaginaDeCompra {
 		String itens = "";
 		
 		for(LivroDTO livro : carrinho.getItens()) {
+			itens += "<tr>";
+			
 			itens += "<td>" + livro.getTitulo() + "</td>";
 			itens += "<td>" + livro.getDescricao() + "</td>";
 			itens += "<td>" + livro.getPreco() + "</td>";
+			
+			itens += "</tr>";
 		}
+		
 		return itens;
 	}
 }

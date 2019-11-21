@@ -104,8 +104,9 @@ public class CarrinhoLivros implements Serializable{
 
 	@Override
 	public String toString() {
-		return "CarrinhoLivros [itens=" + itens + ", date=" + date + "]";
+		return "CarrinhoLivros [itens=" + itens + ", date=" + date + ", id=" + id + "]";
 	}
+
 	
 	
 }

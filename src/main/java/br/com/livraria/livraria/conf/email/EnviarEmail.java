@@ -18,7 +18,7 @@ public class EnviarEmail{
 	
 	public void enviar(CompraEnvio compraEnvio){
 		PaginaDeCompra pagina = new PaginaDeCompra();
-		String conteudo = pagina.email(compraEnvio.getCarrinho());
+		String conteudo = pagina.email(compraEnvio);
 		
 		String to = compraEnvio.getEmail();
 		

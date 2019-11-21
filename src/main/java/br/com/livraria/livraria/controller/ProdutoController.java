@@ -166,11 +166,7 @@ public class ProdutoController {
 	private void enviaEmail(CompraEnvio compraEnvio) {
 		EnviarEmail enviar = new EnviarEmail();
 		
-		CompraEnvio enviarCompra = compraEnvio;
-		
-		enviar.enviar(enviarCompra);
-		
-		
+		enviar.enviar(compraEnvio);
 	}
 	
 	private Date getAgora() {
