@@ -12,6 +12,15 @@
 	<div th:insert="~{fragment/main :: menu}" class="header"></div>
 	
 	<section class="container">
+		<div class="jumbotron"  th:if="${msg_resultado}">
+			<ul class="mdl-list">
+				<li class="mdl-list__item">						 	
+					<p id="p-mensagem" class="msg-erro" th:text="${msg_resultado}" >...</p>	
+				</li>
+			</ul>
+		</div>
+		
+	
 		<div class="col-lg-12">
 			<h2 class="titulo-finalizar">Preencha seus dados antes de finalizar a Compra.</h2>
 			<form method="post" action="terminado" id="finalizar">

@@ -1,7 +1,6 @@
 package br.com.livraria.livraria.controller;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Optional;
 
@@ -17,17 +16,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.livraria.livraria.conf.email.EnviarEmail;
 import br.com.livraria.livraria.model.CarrinhoLivros;
 import br.com.livraria.livraria.model.CompraEnvio;
+import br.com.livraria.livraria.model.CompraReq;
 import br.com.livraria.livraria.model.Compras;
 import br.com.livraria.livraria.model.dto.LivroDTO;
 import br.com.livraria.livraria.model.form.CompraForm;
 import br.com.livraria.livraria.model.Livro;
 import br.com.livraria.livraria.service.ComprasService;
 import br.com.livraria.livraria.service.LivroService;
+import br.com.livraria.livraria.utils.ConversorDeJSONeObj;
 
 @Controller
 public class ProdutoController {
@@ -38,9 +42,11 @@ public class ProdutoController {
 	@Autowired
 	private ComprasService compraService;
 	
-	
 	@Autowired
 	private CarrinhoLivros carrinho;
+	
+	@Autowired
+	private RestTemplate restTemplate;
 	
 	
 
@@ -138,6 +144,7 @@ public class ProdutoController {
 							final BindingResult result,
 							RedirectAttributes redirectAttributes,
 							Model model) {
+		
 		if(result.hasErrors()) {
 			redirectAttributes.addFlashAttribute("msg_resultado", "Erro em alguns campos!");
 			System.out.println(compraForm);
@@ -145,22 +152,44 @@ public class ProdutoController {
 			return "cliente/finalizar";
 		}
 		
+		
 		CompraEnvio compraEnvio = compraForm.getCompra();
 		carrinho.setDate(getAgora());
-		
 		compraEnvio.setCarrinho(carrinho);
 		
-		Compras compras = compraEnvio.getCompra();
-		//compraService.salvar(compras);
+		if(requisicao(compraEnvio)) {
+			
+			Compras compras = compraEnvio.getCompra();
+			//compraService.salvar(compras);
+			
+			
+			//enviaEmail(compraEnvio);
+			
+			carrinho.limpa();
+			redirectAttributes.addFlashAttribute("msg_resultado", "Compra feita! "
+					+ "Aguarde o email.");
+			
+			return "redirect:/";
+		} else {
+			return "cliente/finalizar";
+		}
 		
+	}
+
+
+	private boolean requisicao(CompraEnvio compraEnvio) {
+		final String uri = "http://httpbin.org/post";
+		ConversorDeJSONeObj conversor = new ConversorDeJSONeObj();
 		
-		enviaEmail(compraEnvio);
-		
-		carrinho.limpa();
-		redirectAttributes.addFlashAttribute("msg_resultado", "Compra feita! "
-				+ "Aguarde o email.");
-		
-		return "redirect:/";
+		CompraReq compraReq = new CompraReq(compraEnvio);
+		String json = conversor.toJSON(compraReq);
+		try {
+			@SuppressWarnings("unused")
+			String response = restTemplate.postForObject(uri, json, String.class);
+			return true;
+		} catch(HttpClientErrorException | HttpServerErrorException httpClientOrServerExc) {
+			return false;
+		}
 	}
 	
 	private void enviaEmail(CompraEnvio compraEnvio) {
