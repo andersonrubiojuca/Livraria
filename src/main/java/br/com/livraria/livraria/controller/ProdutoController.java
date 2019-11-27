@@ -160,10 +160,10 @@ public class ProdutoController {
 		if(requisicao(compraEnvio)) {
 			
 			Compras compras = compraEnvio.getCompra();
-			//compraService.salvar(compras);
+			compraService.salvar(compras);
 			
 			
-			//enviaEmail(compraEnvio);
+			enviaEmail(compraEnvio);
 			
 			carrinho.limpa();
 			redirectAttributes.addFlashAttribute("msg_resultado", "Compra feita! "
