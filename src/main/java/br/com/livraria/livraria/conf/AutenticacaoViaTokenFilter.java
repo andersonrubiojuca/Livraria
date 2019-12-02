@@ -12,13 +12,18 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import br.com.livraria.livraria.model.Usuario;
-import br.com.livraria.livraria.service.UsuarioService;
+import br.com.livraria.livraria.repository.UsuarioRepository;
 
 
 public class AutenticacaoViaTokenFilter extends OncePerRequestFilter{
 	
 	private TokenService tokenService;
-	private UsuarioService repository;
+	private UsuarioRepository repository;
+
+	public AutenticacaoViaTokenFilter(TokenService tokenService, UsuarioRepository repository) {
+		this.tokenService = tokenService;
+		this.repository = repository;
+	}
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)

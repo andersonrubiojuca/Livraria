@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<link rel="icon" type="imagem/png" th:href="@{../img/livraria-ico.png}" />
+	<title>Iniciando zona admin</title>
+	<link th:href="@{../css/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+	<link th:href="@{../css/admin.css}" rel="stylesheet" />
+	<style type="text/css">
+        body{
+            padding: 60px 0px;
+        }
+    </style>
+</head>
+<body>
+	<div class="container">
+        <h1>Login Casa do Código</h1>
+        <form action="/login" method="post">
+            <div class="form-group">
+                <label>Nome</label>
+                <input type="text" name="username" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Senha</label>
+                <input type="password" name="password" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-primary">Logar</button>
+        </form>
+    </div>
+</body>
+</html>
