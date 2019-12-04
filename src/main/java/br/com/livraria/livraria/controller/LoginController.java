@@ -11,6 +11,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.livraria.livraria.conf.TokenService;
 import br.com.livraria.livraria.model.dto.TokenDTO;
@@ -35,19 +36,21 @@ public class LoginController {
 		return "login";
 	}
 	
-	//testar denovo
 	@RequestMapping(value="/entrar", method=RequestMethod.POST)
-	public ResponseEntity<TokenDTO> entrar(@Valid LoginForm form) {
+	public String entrar(@Valid LoginForm form, RedirectAttributes redirectAttributes) {
 		UsernamePasswordAuthenticationToken dadosLogin = form.converter();
 		
 		try {
 			Authentication authentication = manager.authenticate(dadosLogin);
 			String token = tokenService.gerarToken(authentication);
-			return ResponseEntity.ok(new TokenDTO(token, "Bearer"));
+			ResponseEntity.ok(new TokenDTO(token, "Bearer"));
+			
+			return "redirect:/lista";
 		}catch(AuthenticationException e ) {
-			return ResponseEntity.badRequest().build();
+			ResponseEntity.badRequest().build();
+			redirectAttributes.addFlashAttribute("msg_resultado", "Login e/ou senha incorretos!");
+			return "redirect:/login";
 		}
 		
-		//return "redirect:/lista";
 	}
 }
