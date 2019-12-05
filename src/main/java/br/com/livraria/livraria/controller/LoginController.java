@@ -1,5 +1,6 @@
 package br.com.livraria.livraria.controller;
 
+//import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,7 @@ public class LoginController {
 			String token = tokenService.gerarToken(authentication);
 			ResponseEntity.ok(new TokenDTO(token, "Bearer"));
 			
-			return "redirect:/lista";
+			return "redirect:/admin/lista";
 		}catch(AuthenticationException e ) {
 			ResponseEntity.badRequest().build();
 			redirectAttributes.addFlashAttribute("msg_resultado", "Login e/ou senha incorretos!");
@@ -53,4 +54,17 @@ public class LoginController {
 		}
 		
 	}
+	
+	/*
+	@RequestMapping(value="/sair", method=RequestMethod.GET)
+	public String sair(HttpServletRequest request) {
+		String auth = request.getHeader("Authorization");
+		if(auth != null && auth.contains("Bearer")) {
+			String tokenId = auth.substring("Bearer".length()+1);
+			manager.remove
+		}
+		
+		return "redirect:/";
+	}
+	*/
 }

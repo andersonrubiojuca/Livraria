@@ -23,6 +23,7 @@ import br.com.livraria.livraria.model.form.LivroForm;
 import br.com.livraria.livraria.service.LivroService;
 
 @Controller
+@RequestMapping("/admin")
 public class LivroController {
 	
 	@Autowired
@@ -63,7 +64,7 @@ public class LivroController {
 		
 		service.salvar(livro);
 		
-		ModelAndView modelAndView = new ModelAndView("redirect:/lista");
+		ModelAndView modelAndView = new ModelAndView("redirect:/admin/lista");
 		
 		redirectAttributes.addFlashAttribute("msg_resultado", "Livro salvo com sucesso!");
 		return modelAndView;
