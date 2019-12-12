@@ -1,26 +1,45 @@
-core.symlinks=false
-core.autocrlf=true
-core.fscache=true
-color.diff=auto
-color.status=auto
-color.branch=auto
-color.interactive=true
-help.format=html
-rebase.autosquash=true
-http.sslcainfo=C:/Program Files/Git/mingw64/ssl/certs/ca-bundle.crt
-http.sslbackend=openssl
-diff.astextplain.textconv=astextplain
-filter.lfs.clean=git-lfs clean -- %f
-filter.lfs.smudge=git-lfs smudge --skip -- %f
-filter.lfs.process=git-lfs filter-process --skip
-filter.lfs.required=true
-credential.helper=manager
-core.editor="C:\Users\Tel e Bruno\AppData\Local\Programs\Microsoft VS Code\Code.exe" --wait
-user.email=andersonrubiojuca@yahoo.com.br
-user.name=Anderson Juca
-core.repositoryformatversion=0
-core.filemode=false
-core.bare=false
-core.logallrefupdates=true
-core.symlinks=false
-core.ignorecase=true
+[33m11006ae[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m criando o back de login
+[33m217f6ea[m resolvido o bug do css
+[33m3c1cd7a[m cuidando de alguns bugs do security e criando a pagina de login
+[33m6d14695[m Comecando o sistema de seguranca
+[33m601424a[m Feita Requisicao REST
+[33m544ed5d[m finalizando o email
+[33m4e0f45b[m Resolvido o bug do async
+[33m6e0b258[m verificando problemas no async
+[33m44c965d[m Enviando Email
+[33m0aef601[m criando página para o email
+[33m9f0aefc[m resolvendo alguns problemas com email
+[33mb4f64ae[m resolvendo o BD
+[33m635c49d[m fazendo o email
+[33mb35d92d[m criando a funcao de finalizar e o email
+[33mbcfa8e3[m criando o envio de compra
+[33m84c9327[m finalizando a pagina de finalizar
+[33mdc3f7b2[m terminado o remover e fazendo o 'finalizar'
+[33m54ea986[m criando a pagina de finalizar e deletar item manualmente
+[33m55ad72c[m padronizando o carrinho
+[33m39d03b0[m melhorando a pagina de itens
+[33mb5bfd09[m Versao estavel do carrinho
+[33mfacef4a[m cuidando de cookies
+[33m9dc6ffd[m testativa de melhorar o carrinho
+[33mdabbf99[m criando CarrinhoLivros
+[33mfe79797[m removendo bugs do git
+[33m6de194e[m pequena atualizacao no pom
+[33m8c881a2[m Criando o link de Meu Carrinho
+[33m2205e28[m[33m ([m[1;32mtemp[m[33m)[m inserindo link do Meu Carrinho
+[33mb118ce2[m inserindo a tabela do carrinho
+[33me6c1a88[m This is a new commit for what I originally planned to be amended
+[33md021519[m a desfazer
+[33m25de87b[m Update README.md
+[33m6ce1dba[m configurando a lista de itens
+[33m02fb1f2[m Merge branch 'master' of https://github.com/andersonrubiojuca/Livraria
+[33mb342401[m Adicionando o erro 404
+[33m1d000aa[m Update README.md
+[33mc53028c[m Criando Carrinho
+[33mb537ccb[m Sobrecarga do LivroDTO
+[33m594a642[m Merge branch 'master' of https://github.com/andersonrubiojuca/Livraria
+[33mde6b3cc[m Pagina de detalhes terminado
+[33m90f616b[m Update README.md
+[33m2cf0cb8[m Update README.md
+[33md18e9aa[m Update README.md
+[33mcc60511[m Update README.md
+[33m8315723[m Commit inicial

@@ -11,9 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import br.com.livraria.livraria.repository.UsuarioRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity
 @Configuration
@@ -21,12 +19,6 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
 	private AutenticacaoService autenticacaoService;
-	
-	@Autowired
-	private TokenService tokenService;
-	
-	@Autowired
-	private UsuarioRepository repository;
 	
 	@Override
 	@Bean
@@ -41,16 +33,23 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-		.antMatchers("/").permitAll()
-		.antMatchers("/cliente/**").permitAll()
-		.antMatchers("/login").permitAll()
-		.antMatchers("/admin").permitAll()
-		.antMatchers("/admin/**").hasRole("ADMIN")
-		.anyRequest().authenticated()
-		.and().csrf().disable()
-		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-		.and().addFilterBefore(new AutenticacaoViaTokenFilter(tokenService, repository) , UsernamePasswordAuthenticationFilter.class);
+		http
+			.authorizeRequests()
+				.antMatchers("/").permitAll()
+				.antMatchers("/cliente/**").permitAll()
+				.antMatchers("/login").permitAll()
+				.antMatchers("/admin").permitAll()
+				.antMatchers("/admin/**").hasRole("ADMIN")
+				.anyRequest().authenticated()
+			.and()
+				.csrf().disable()
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+			.and()
+				.formLogin().loginPage("/login").defaultSuccessUrl("/admin/lista").permitAll()
+			.and()
+				.logout()
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
+				.logoutSuccessUrl("/");
 	}
 	
 	@Override

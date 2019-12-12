@@ -9,7 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -34,8 +34,8 @@ public class Usuario implements UserDetails{
 	private String senha;
 	
 	
-	@ManyToMany(fetch = FetchType.EAGER)
-	private List<Perfil> perfil = new ArrayList<>();
+	@OneToMany(fetch = FetchType.EAGER)
+	private List<Role> role = new ArrayList<>();
 	
 
 	@Deprecated
@@ -101,7 +101,7 @@ public class Usuario implements UserDetails{
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return this.perfil;
+		return this.role;
 	}
 
 	@Override
