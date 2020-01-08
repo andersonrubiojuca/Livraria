@@ -23,6 +23,7 @@ import br.com.livraria.livraria.model.form.LivroForm;
 import br.com.livraria.livraria.service.LivroService;
 
 @Controller
+@RequestMapping(value="admin")
 public class LivroController {
 	
 	@Autowired

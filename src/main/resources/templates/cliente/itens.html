@@ -39,7 +39,7 @@
 						<td><span th:text="${livro.titulo }">Titulo</span></td>
 						<td><span th:text="${livro.descricao }">Descrição</span></td>
 						<td><span th:text="${livro.paginas }">Páginas</span></td>
-						<td><img class="capas" th:src="${'img/capa/' + livro.sumarioPath}"></td>
+						<td><img class="capas" th:src="${'../img/capa/' + livro.sumarioPath}"></td>
 						<td>
 							<input type="hidden" name="id" id="id" th:value="${livro.id}">
 							<a th:href="${'remover/' + iter.index}"><img class="img-remover" th:src="@{../img/remover.png}"></a>
@@ -70,6 +70,6 @@
 	</section>
 	
 	
-	<div class="footer" th:insert="~{fragment/main :: footer}"></div>
+	<footer class="footer" th:insert="~{fragment/main :: footer}"></footer>
 </body>
 </html>

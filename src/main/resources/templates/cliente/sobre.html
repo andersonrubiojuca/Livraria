@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<link rel="icon" type="imagem/png" href="img/livraria-ico.png" />
+	<link rel="icon" type="imagem/png" th:href="@{../img/livraria-ico.png}" />
 	<title>Sobre Nós</title>
 	<link th:href="@{../css/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
 	<link th:href="@{../css/main.css}" rel="stylesheet" />
@@ -27,6 +27,6 @@
 		</div>
 	</div>
 		
-	<div class="footer" th:insert="~{fragment/main :: footer}"></div>
+	<footer class="footer" th:insert="~{fragment/main :: footer}"></footer>
 </body>
 </html>

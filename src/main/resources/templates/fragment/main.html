@@ -18,14 +18,36 @@
 	            </ul>
 	            <ul class="navbar-nav my-2 my-lg-0">
 		            <li class="nav-item">
-		            	<a class="nav-link" th:href="@{../carrinho}"><img class="sacola-img" th:src="@{../img/sacola.png}"> Meu carrinho</a>
+		            	<a class="nav-link" th:href="@{../site/carrinho}"><img class="sacola-img" th:src="@{../img/sacola.png}"> Meu carrinho</a>
 		            <li>
 	            </ul>
 	        </div>
 	    </nav>
     </header>
     
-    <footer class="pt-4  container" th:fragment="footer">
+    <header class="container" id="header" th:fragment="menu-site">
+	    <nav class="navbar-expand-lg navbar-light row">
+	    	<div class="col-xl-2 logo-header">
+		        <a class="navbar-brand" href="/"><img th:src="@{../../img/livraria-assis.jpg}" class="header-img header-logo"></a>
+	        </div>
+	        
+	        <div class="collapse navbar-collapse col-xl-10 conteudo-header" id="navbarSupportedContent">
+	            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+		            <li class="nav-item">
+		                <a class="nav-link" th:href="@{../../login}">Entrar</a>
+		            </li>
+	            </ul>
+	            <ul class="navbar-nav my-2 my-lg-0">
+		            <li class="nav-item">
+		            	<a class="nav-link" th:href="@{../../site/carrinho}"><img class="sacola-img" th:src="@{../../img/sacola.png}"> Meu carrinho</a>
+		            <li>
+	            </ul>
+	        </div>
+	    </nav>
+    </header>
+    
+    <!-- Footer -->  
+    <div class="pt-4  container" th:fragment="footer">
         <div class="row">
           <div class="col-12 col-md logo">
             <span class="text-footer">Livraria Assis</span>
@@ -54,7 +76,7 @@
 	          <div class="col-6 col-md">
 	            <h5>Sobre</h5>
 	            <ul class="list-unstyled text-small">
-	              <li><a class="text-footer" th:href="@{../sobre}">Sobre nós</a></li>
+	              <li><a class="text-footer" th:href="@{../cliente/sobre}">Sobre nós</a></li>
 	              <li><a class="text-footer" href="#">Locais</a></li>
 	              <li><a class="text-footer" href="#">Privacidade</a></li>
 	              <li><a class="text-footer" href="#">Termos</a></li>
@@ -63,8 +85,49 @@
         </div>
         
 	      <script type="text/javascript" th:src="@{../js/jquery.js}"></script>
-      </footer>
-  
+      </div>
+      
+      <!-- Footer -->  
+    <div class="pt-4  container" th:fragment="footer-detalhe">
+        <div class="row">
+          <div class="col-12 col-md logo">
+            <span class="text-footer">Livraria Assis</span>
+            <small class="d-block mb-3 text-footer">© 2019-2019</small>
+          </div>
+	          <div class="col-6 col-md">
+	            <h5>Features</h5>
+	            <ul class="list-unstyled text-small">
+	              <li><a class="text-footer" href="#">Algo legal</a></li>
+	              <li><a class="text-footer" href="#">Feature aleatória</a></li>
+	              <li><a class="text-footer" href="#">Recursos para times</a></li>
+	              <li><a class="text-footer" href="#">Coisas para desenvolvedores</a></li>
+	              <li><a class="text-footer" href="#">Outra coisa legal</a></li>
+	              <li><a class="text-footer" href="#">último item</a></li>
+	            </ul>
+	          </div>
+	          <div class="col-6 col-md">
+	            <h5>Fontes</h5>
+	            <ul class="list-unstyled text-small">
+	              <li><a class="text-footer" href="#">Fonte</a></li>
+	              <li><a class="text-footer" href="#">Nome da fonte</a></li>
+	              <li><a class="text-footer" href="#">Outra fonte</a></li>
+	              <li><a class="text-footer" href="#">Fonte final</a></li>
+	            </ul>
+	          </div>
+	          <div class="col-6 col-md">
+	            <h5>Sobre</h5>
+	            <ul class="list-unstyled text-small">
+	              <li><a class="text-footer" th:href="@{../../cliente/sobre}">Sobre nós</a></li>
+	              <li><a class="text-footer" href="#">Locais</a></li>
+	              <li><a class="text-footer" href="#">Privacidade</a></li>
+	              <li><a class="text-footer" href="#">Termos</a></li>
+	            </ul>
+	          </div>
+        </div>
+        
+	      <script type="text/javascript" th:src="@{../../js/jquery.js}"></script>
+      </div>
+   
   
 </body>
 </html>

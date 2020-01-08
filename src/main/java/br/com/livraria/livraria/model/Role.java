@@ -1,35 +1,47 @@
 package br.com.livraria.livraria.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-import org.springframework.security.core.GrantedAuthority;
+import lombok.Data;
 
 @Entity
-public class Role implements GrantedAuthority{
-
-	private static final long serialVersionUID = 1L;
+@Data
+public class Role{
 	
-	private String nome;
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "role_id")
+	private int id;
+	
+
+	private String role;
 	
 	@Deprecated
 	public Role() {}
 	
 	public Role(String nome) {
-		this.setNome(nome);
+		this.setRole(nome);
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 	
-
-	@Override
-	public String getAuthority() {
-		return this.nome;
+	public int getId() {
+		return id;
 	}
-
-	public String getNome() {
-		return nome;
+	
+	public void setId(int id) {
+		this.id = id;
 	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+	
 
 }

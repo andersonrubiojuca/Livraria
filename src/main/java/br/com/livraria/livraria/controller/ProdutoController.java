@@ -4,8 +4,6 @@ import java.sql.Date;
 import java.util.Calendar;
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,14 +24,15 @@ import br.com.livraria.livraria.model.CarrinhoLivros;
 import br.com.livraria.livraria.model.CompraEnvio;
 import br.com.livraria.livraria.model.CompraReq;
 import br.com.livraria.livraria.model.Compras;
+import br.com.livraria.livraria.model.Livro;
 import br.com.livraria.livraria.model.dto.LivroDTO;
 import br.com.livraria.livraria.model.form.CompraForm;
-import br.com.livraria.livraria.model.Livro;
 import br.com.livraria.livraria.service.ComprasService;
 import br.com.livraria.livraria.service.LivroService;
 import br.com.livraria.livraria.utils.ConversorDeJSONeObj;
 
 @Controller
+@RequestMapping(value="site")
 public class ProdutoController {
 	
 	@Autowired
@@ -86,7 +85,7 @@ public class ProdutoController {
 			model.addAttribute("carrinho", carrinho);
 			
 			
-			return "redirect:/carrinho";
+			return "redirect:/site/carrinho";
 			
 		} else {
 			return "erro/404";
@@ -96,9 +95,7 @@ public class ProdutoController {
 	
 	
 	@RequestMapping(value="/carrinho", method=RequestMethod.GET)
-	public String lista(Model model,
-			HttpServletRequest request, 
-			HttpServletResponse response) {
+	public String lista(Model model) {
 		
 		model.addAttribute("carrinho", carrinho);
 		
@@ -111,7 +108,7 @@ public class ProdutoController {
 		carrinho.limpa();
 		model.addAttribute("carrinho", carrinho);
 		
-		return "redirect:/carrinho";
+		return "redirect:/site/carrinho";
 	}
 	
 	@RequestMapping(value="/finalizar")
@@ -136,7 +133,7 @@ public class ProdutoController {
 		
 		model.addAttribute("carrinho", carrinho);
 		
-		return "redirect:/carrinho";
+		return "redirect:/site/carrinho";
 	}
 	
 	@RequestMapping(value="/terminado", method=RequestMethod.POST)

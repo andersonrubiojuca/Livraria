@@ -2,15 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<link rel="icon" type="imagem/png" href="../img/livraria-ico.png" />
+	<link rel="icon" type="imagem/png" th:href="@{../../img/livraria-ico.png}" />
 	<title th:text="${livro.titulo + ' - Livraria Assis'}"></title>
-	<link th:href="@{../css/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
-	<link href="../css/main.css" rel="stylesheet" />
-	<link th:href="@{../css/detalhes.css}" rel="stylesheet" />
+	<link th:href="@{../../css/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+	<link th:href="@{../../css/main.css}" rel="stylesheet" />
+	<link th:href="@{../../css/detalhes.css}" rel="stylesheet" />
 </head>
 <body>
 
-	<div th:insert="~{fragment/main :: menu}" class="header"></div>
+	<div th:insert="~{fragment/main :: menu-site}" class="header"></div>
 	
 	<div class="jumbotron jumbotron-fluid">
 	
@@ -19,7 +19,7 @@
 			<article id="livro-css-eficiente">
 			<header id="product-highlight" class="clearfix">
 				<div id="product-overview" class="container">
-					<img width="280px" height="395px" th:src="${'../img/capa/' + livro.sumarioPath}"
+					<img width="280px" height="395px" th:src="${'../../img/capa/' + livro.sumarioPath}"
 						class="product-featured-image" />
 					<h1 class="product-title"><span th:text="${livro.titulo }"></span></h1>
 					<p class="product-author">
@@ -30,7 +30,7 @@
 			</header>
 	
 			<section class="buy-options clearfix">
-				<form action='../carrinho' method="post" class="container">
+				<form th:action="@{../../site/carrinho}" method="post" class="container">
 					<input type="hidden" th:value="${livro.id }" id="livroId" name="livroId" >
 					<ul id="variants" class="clearfix">
 							<li class="buy-option">
@@ -69,6 +69,6 @@
 		</div>
 	</div>
 	
-	<div class="footer" th:insert="~{fragment/main :: footer}"></div>
+	<footer class="footer" th:insert="~{fragment/main :: footer-detalhe}"></footer>
 </body>
 </html>

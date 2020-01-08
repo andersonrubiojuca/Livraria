@@ -10,11 +10,13 @@
 	</parent>
 	<groupId>br.com.livraria</groupId>
 	<artifactId>livraria</artifactId>
-	<version>0.2.36</version>
+	<version>0.2.37</version>
 	<name>livraria</name>
 	<description>Projeto de uma livraria</description>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 	</properties>
 
@@ -50,6 +52,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+			<scope>provided</scope>
 		</dependency>
 		
 		<!-- token -->

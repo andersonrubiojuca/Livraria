@@ -23,8 +23,8 @@
 	    
 	        <ul class="lista-livros" th:each="livro : ${livros}">
 				<li>
-					<a th:href="${'detalhes/' + livro.id}">
-						<h2 class="product-title"><span th:text="${livro.titulo}"> Título </span></h2>
+					<a th:href="${'site/detalhes/' + livro.id}">
+						<h2 class="product-title" ><span th:text="${livro.titulo}"> Título </span></h2>
 						<img class="capas" th:src="${'img/capa/' + livro.sumarioPath}">
 					</a>
 				</li>
@@ -33,7 +33,7 @@
 	    </div>
     </div>
 
-	<div class="footer" th:insert="~{fragment/main :: footer}"></div>
+	<footer class="footer" th:insert="~{fragment/main :: footer}"></footer>
 	<script type="text/javascript" th:src="@{../js/index.js}"></script>
 </body>
 </html>

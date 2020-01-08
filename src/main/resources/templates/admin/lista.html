@@ -2,11 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="imagem/png" href="img/livraria-ico.png" />
+<link rel="icon" type="imagem/png" th:href="@{../img/livraria-ico.png}" />
 <title>Lista de Livros</title>
-<link href="css/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-<link href="css/admin.css" rel="stylesheet" />
-<link href="css/lista.css" rel="stylesheet" />
+<link th:href="@{../css/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+<link th:href="@{../css/admin.css}" rel="stylesheet" />
+<link th:href="@{../css/lista.css}" rel="stylesheet" />
 </head>
 <body>
 	<div th:insert="~{fragment/admin :: menu}"></div>
@@ -35,7 +35,7 @@
 					<td><span th:text="${livro.paginas}"> Páginas </span></td>
 					<td><span th:text="${livro.dataLancamento}"> Data de Lançamento </span></td>
 					<td><span th:text="${livro.preco}" data-preco="preco"> Preço </span></td>
-					<td><img class="capas" th:src="${'img/capa/' + livro.sumarioPath}"></td>
+					<td><img class="capas" th:src="${'../img/capa/' + livro.sumarioPath}"></td>
 				</tr>
 			</tbody>
 		</table>

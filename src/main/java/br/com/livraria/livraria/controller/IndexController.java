@@ -21,7 +21,7 @@ public class IndexController {
         return "index";
     }
 	
-	@RequestMapping("sobre")
+	@RequestMapping("cliente/sobre")
 	public String sobre() {
 		return "cliente/sobre";
 	}
