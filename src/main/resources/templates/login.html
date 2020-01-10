@@ -6,16 +6,19 @@
 	<title>Iniciando zona admin</title>
 	<link th:href="@{../css/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
 	<link th:href="@{../css/admin.css}" rel="stylesheet" />
-	<style type="text/css">
-        body{
-            padding: 60px 0px;
-        }
-    </style>
+	<link th:href="@{../css/login.css}" rel="stylesheet" />
 </head>
 <body>
 	<div class="container">
         <h1>Login Casa do Código</h1>
-        <form th:action="@{/login-src}" method="POST" class="form-sigin" th:modelAttribute="Usuario">
+        
+        <ul class="mdl-list" th:if="${msg_resultado}">
+			<li class="mdl-list__item">						 	
+				<p id="p-mensagem" class="msg" th:text="${msg_resultado}" >...</p>	
+			</li>
+		</ul>
+		
+        <form th:action="@{/login}" method="post">
             <div class="form-group">
                 <label>Nome</label>
                 <input type="text" id="nome" name="nome" class="form-control" />
@@ -27,5 +30,8 @@
             <button type="submit" class="btn btn-primary">Logar</button>
         </form>
     </div>
+    
+    <script type="text/javascript" th:src="@{../js/jquery.js}"></script>
+    <script type="text/javascript" th:src="@{../js/index.js}"></script>
 </body>
 </html>

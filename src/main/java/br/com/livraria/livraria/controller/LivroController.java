@@ -64,7 +64,7 @@ public class LivroController {
 		
 		service.salvar(livro);
 		
-		ModelAndView modelAndView = new ModelAndView("redirect:/lista");
+		ModelAndView modelAndView = new ModelAndView("redirect:/admin/lista");
 		
 		redirectAttributes.addFlashAttribute("msg_resultado", "Livro salvo com sucesso!");
 		return modelAndView;

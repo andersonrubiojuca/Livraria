@@ -1,0 +1,13 @@
+
+body{
+    padding: 60px 0px;
+}
+      
+.mdl-list li{
+	list-style-type: none;
+}
+
+.msg{
+	color: #ff2828;
+}
+		

@@ -5,12 +5,12 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.4.RELEASE</version>
+		<version>2.2.1.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.livraria</groupId>
 	<artifactId>livraria</artifactId>
-	<version>0.2.37</version>
+	<version>0.2.38</version>
 	<name>livraria</name>
 	<description>Projeto de uma livraria</description>
 
@@ -53,12 +53,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-			<scope>provided</scope>
-		</dependency>
+
 		
 		<!-- token -->
 		<dependency>

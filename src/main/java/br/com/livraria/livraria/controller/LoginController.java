@@ -17,7 +17,7 @@ public class LoginController {
 	@Autowired
 	private UsuarioService service;
 
-	@RequestMapping(value="/login", method= {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/login", method= RequestMethod.GET)
 	public String login() {
 		return "/login";
 	}
@@ -34,4 +34,17 @@ public class LoginController {
 		view.setViewName("/admin/home");
 		return view;
 	}
+	
+	/*
+	@RequestMapping(value="/sair", method=RequestMethod.GET)
+	public String sair(HttpServletRequest request) {
+		String auth = request.getHeader("Authorization");
+		if(auth != null && auth.contains("Bearer")) {
+			String tokenId = auth.substring("Bearer".length()+1);
+			manager.remove
+		}
+		
+		return "redirect:/";
+	}
+	*/
 }

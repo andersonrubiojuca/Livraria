@@ -45,15 +45,13 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter{
 				.antMatchers("/").permitAll()
 				.antMatchers("/cliente/**").permitAll()
 				.antMatchers("/site/**").permitAll()
-				.antMatchers("/login").permitAll()
 				.antMatchers("/admin").permitAll()
 				.antMatchers("/admin/**").hasAuthority("ADMIN")
-				.anyRequest().authenticated()
+				//.anyRequest().authenticated()
 			.and()
-				.csrf().disable()
-				.formLogin().loginPage("/login").failureUrl("/login?error=true")
-				.loginProcessingUrl("/login-src")
-				.defaultSuccessUrl("/admin/home", true)
+				.formLogin().loginPage("/login")
+				.permitAll().failureUrl("/login?error=true")
+				.defaultSuccessUrl("/admin/home")
 				.usernameParameter("nome")
 				.passwordParameter("senha")
 			.and()
@@ -61,11 +59,13 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter{
 				.logoutUrl("/logout")
 				.logoutSuccessUrl("/")
 				.invalidateHttpSession(true)
-				.deleteCookies("JSESSIONID");
+				.deleteCookies("JSESSIONID")
+			.and()
+				.csrf().disable();
 	}
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/resources/**").anyRequest();
+		web.ignoring().antMatchers("/resources/**");
 	}
 }
