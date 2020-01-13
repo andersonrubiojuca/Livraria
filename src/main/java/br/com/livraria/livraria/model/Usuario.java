@@ -15,7 +15,10 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
+import lombok.Data;
+
 @Entity
+@Data
 public class Usuario{
 	
 	
