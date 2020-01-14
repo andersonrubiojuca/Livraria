@@ -12,9 +12,9 @@
 	<div class="container">
         <h1>Login Casa do Código</h1>
         
-        <ul class="mdl-list" th:if="${msg_resultado}">
+        <ul class="mdl-list" id="erro" th:if="${(param.error != null) and (param.error[0] == 'true')}">
 			<li class="mdl-list__item">						 	
-				<p id="p-mensagem" class="msg" th:text="${msg_resultado}" >...</p>	
+				<p id="p-mensagem" class="msg">Usuário e/ou senha incorreto!</p>	
 			</li>
 		</ul>
 		
@@ -27,7 +27,11 @@
                 <label>Senha</label>
                 <input type="password" id="senha" name="senha" class="form-control" />
             </div>
-            <button type="submit" class="btn btn-primary">Logar</button>
+            <div>
+	            <button type="submit" class="btn btn-primary">Logar</button>
+            	<a th:href="@{../}"><button type="button" class="btn btn-info voltar">Voltar</button></a>
+            </div>
+            
         </form>
     </div>
     
