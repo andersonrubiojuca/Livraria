@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@Deprecated
 public class ErrosController {
 
 	//por hora só vai retornar a página do 404

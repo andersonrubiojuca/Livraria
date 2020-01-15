@@ -7,6 +7,8 @@ import java.io.IOException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,8 +21,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.livraria.livraria.infra.FileSaver;
 import br.com.livraria.livraria.model.Livro;
+import br.com.livraria.livraria.model.Usuario;
 import br.com.livraria.livraria.model.form.LivroForm;
 import br.com.livraria.livraria.service.LivroService;
+import br.com.livraria.livraria.service.UsuarioService;
 
 @Controller
 @RequestMapping(value="admin")
@@ -30,12 +34,16 @@ public class LivroController {
 	private LivroService service;
 	
 	@Autowired
+	private UsuarioService usuarioService;
+	
+	@Autowired
     private FileSaver fileSaver;
 
 	@RequestMapping(value="/form", method=RequestMethod.GET)
 	public String form(Model model) {
 
 		model.addAttribute("livro", new Livro());
+		model.addAttribute("nome", getUsuario());
 		
 		return new String("admin/adicionar");
 	}
@@ -73,8 +81,16 @@ public class LivroController {
 	@RequestMapping(value="/lista", method=RequestMethod.GET)
 	public String lista(Model model) {
 		model.addAttribute("livros", service.listar());
+		model.addAttribute("nome", getUsuario());
 		
 		return "admin/lista";
 	}
 	
+	private String getUsuario() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		
+		Usuario usuario = usuarioService.login(auth.getName()).get();
+		
+		return "Olá " + usuario.getLogin();
+	}
 }
