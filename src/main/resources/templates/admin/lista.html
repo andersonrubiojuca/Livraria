@@ -26,6 +26,8 @@
 				<th>Data de Lançamento</th>
 				<th class="preco">Preço</th>
 				<th>Capa</th>
+				<th>Alterar</th>
+				<th>Remover</th>
 			</thead>
 			<tbody>
 				<tr th:if="${livros.empty}">
@@ -38,6 +40,8 @@
 					<td><span th:text="${livro.dataLancamento}"> Data de Lançamento </span></td>
 					<td><span th:text="${livro.preco}" data-preco="preco"> Preço </span></td>
 					<td><img class="capas" th:src="${'../img/capa/' + livro.sumarioPath}"></td>
+					<td></td>
+					<td></td>
 				</tr>
 			</tbody>
 		</table>
