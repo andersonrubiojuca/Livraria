@@ -5,6 +5,7 @@
 <link rel="icon" type="imagem/png" th:href="@{../img/livraria-ico.png}" />
 <title>Lista de Livros</title>
 <link th:href="@{../css/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+<link th:href="@{../css/fontawesome-5.12.0/css/all.min.css}" rel="stylesheet" />
 <link th:href="@{../css/admin.css}" rel="stylesheet" />
 <link th:href="@{../css/lista.css}" rel="stylesheet" />
 </head>
@@ -20,18 +21,20 @@
 		
 		<table class="table table-bordered table-striped table-hover">
 			<thead>
-				<th>Título</th>
-				<th>Descrição</th>
-				<th>Páginas</th>
-				<th>Data de Lançamento</th>
-				<th class="preco">Preço</th>
-				<th>Capa</th>
-				<th>Alterar</th>
-				<th>Remover</th>
+				<tr>
+					<th>Título</th>
+					<th>Descrição</th>
+					<th>Páginas</th>
+					<th>Data de Lançamento</th>
+					<th class="preco">Preço</th>
+					<th>Capa</th>
+					<th>Editar</th>
+					<th>Remover</th>
+				</tr>
 			</thead>
 			<tbody>
 				<tr th:if="${livros.empty}">
-					<td colspan="2">Parece não haver nenhum livro cadastrado :/</td>
+					<td colspan="8">Parece não haver nenhum livro cadastrado :/</td>
 				</tr>
 				<tr th:each="livro : ${livros}">
 					<td><span th:text="${livro.titulo}"> Título </span></td>
@@ -40,8 +43,8 @@
 					<td><span th:text="${livro.dataLancamento}"> Data de Lançamento </span></td>
 					<td><span th:text="${livro.preco}" data-preco="preco"> Preço </span></td>
 					<td><img class="capas" th:src="${'../img/capa/' + livro.sumarioPath}"></td>
-					<td></td>
-					<td></td>
+					<td><a href="#"><i class="fas fa-edit"></i></a></td>
+					<td><a href="#"><i class="fas fa-trash"></i></a></td>
 				</tr>
 			</tbody>
 		</table>

@@ -31,21 +31,14 @@ public class LivroService {
 		return OpLivro;
 	}
 	
-	public Optional<Livro> alterar (Long id){
+	/*
+	public Optional<Livro> alterar (Long id, Livro livro){
 		Optional<Livro> opLivro;
-		Optional<Livro> livroRaw = listarPorId(id);
-		
-		if(livroRaw.isPresent()) {
-			Livro livro = livroRaw.get();
 			
 			opLivro = repository.editarLivro(id, livro.getTitulo(), livro.getDataLancamento(), livro.getDescricao(), livro.getPaginas(), livro.getPreco(), livro.getSumarioPath());
 			return opLivro;
-		} else {
-			return null;
-		}
-		
 	}
-	
+	*/
 	
 	public ArrayList<LivroDTO> listar(){
 		Iterable<Livro> livros =  repository.findAll();

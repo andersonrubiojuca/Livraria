@@ -3,6 +3,7 @@ package br.com.livraria.livraria.controller;
 
 
 import java.io.IOException;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -31,6 +32,8 @@ import br.com.livraria.livraria.service.UsuarioService;
 @RequestMapping(value="admin")
 public class LivroController {
 	
+	private final String Default = "default.jpg";
+	
 	@Autowired
 	private LivroService service;
 	
@@ -39,6 +42,7 @@ public class LivroController {
 	
 	@Autowired
     private FileSaver fileSaver;
+	
 
 	@RequestMapping(value="/form", method=RequestMethod.GET)
 	public String form(Model model) {
@@ -68,8 +72,12 @@ public class LivroController {
 			return modelAndView;
 		}
 		
-		String path = fileSaver.write(sumario);
-		livro.setSumarioPath(path);
+		if(!sumario.isEmpty()) {
+			String path = fileSaver.write(sumario);
+			livro.setSumarioPath(path);
+		} else {
+			livro.setSumarioPath(Default);
+		}
 		
 		service.salvar(livro);
 		
@@ -87,11 +95,25 @@ public class LivroController {
 		return "admin/lista";
 	}
 	
-	@RequestMapping(value="/deletar{id}", method=RequestMethod.GET)
-	public String deletar(Model modelm, @PathVariable("id") Long id) {
+	@RequestMapping(value="/deletar/{id}", method=RequestMethod.GET)
+	public String deletar(Model model, @PathVariable("id") Long id) {
+		Optional<Livro> livroOp = service.listarPorId(id);
 		
-		return "redirect:/admin/lista";
+		if(livroOp.isPresent()) {
+			Livro livro = livroOp.get();
+			
+			if(livro.getSumarioPath().equals(Default)) {
+				
+			}
+			
+			return "redirect:../admin/lista";
+		} else {
+			return "../../erro/404";
+		}
+		
 	}
+	
+	
 	
 	private String getUsuario() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
