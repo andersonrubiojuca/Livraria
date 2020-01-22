@@ -102,11 +102,13 @@ public class LivroController {
 		if(livroOp.isPresent()) {
 			Livro livro = livroOp.get();
 			
-			if(livro.getSumarioPath().equals(Default)) {
-				
-			}
+			if(!livro.getSumarioPath().equals(Default)) {
+				fileSaver.delete(livro.getSumarioPath());
+			} 
 			
-			return "redirect:../admin/lista";
+			service.remover(id);
+			
+			return "redirect:../lista";
 		} else {
 			return "../../erro/404";
 		}

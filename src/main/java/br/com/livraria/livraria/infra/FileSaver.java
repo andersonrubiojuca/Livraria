@@ -30,7 +30,7 @@ public class FileSaver {
         }
     }
 	
-	
+	@Deprecated
 	public MultipartFile read(String caminho, String nome) {
 		File file = new File(caminho);
 		try {
@@ -42,6 +42,13 @@ public class FileSaver {
 		} catch (IOException e) {
 			throw new RuntimeException(e); 
 		}
+	}
+
+
+	public void delete(String sumarioPath) {
+		File file = new File(baseFolder + sumarioPath);
+		
+		file.delete();
 	}
 
 }

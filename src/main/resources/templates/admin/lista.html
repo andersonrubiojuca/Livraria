@@ -44,7 +44,7 @@
 					<td><span th:text="${livro.preco}" data-preco="preco"> Preço </span></td>
 					<td><img class="capas" th:src="${'../img/capa/' + livro.sumarioPath}"></td>
 					<td><a href="#"><i class="fas fa-edit"></i></a></td>
-					<td><a href="#"><i class="fas fa-trash"></i></a></td>
+					<td><a th:href="${'deletar/' + livro.id}"><i class="fas fa-trash"></i></a></td>
 				</tr>
 			</tbody>
 		</table>
