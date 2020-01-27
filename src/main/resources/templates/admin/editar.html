@@ -2,67 +2,75 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="imagem/png" href="../img/livraria-ico.png" />
+<link rel="icon" type="imagem/png" href="../../img/livraria-ico.png" />
 <title>Adicionar Livro</title>
-<link th:href="@{../css/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
-<link th:href="@{../css/admin.css}" rel="stylesheet" />
-<link th:href="@{../css/form.css}" rel="stylesheet" />
-<link href="../css/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-<link href="../css/admin.css" rel="stylesheet" />
-<link href="../css/form.css" rel="stylesheet" />
+<link th:href="@{../../css/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+<link th:href="@{../../css/admin.css}" rel="stylesheet" />
+<link th:href="@{../../css/form.css}" rel="stylesheet" />
+<link href="../../css/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="../../css/admin.css" rel="stylesheet" />
+<link href="../../css/editar.css" rel="stylesheet" />
 </head>
 <body>
 
-<div th:insert="~{fragment/admin :: menu}"></div>
-<div class="container">
-	<div class="col-lg-12">
-		<h1>Cadastro de Produto</h1>
-		<form th:action="@{../editar}" id="form-edit" method="post" enctype="multipart/form-data">
-			<fieldset>
-				<ul class="mdl-list">
-					 <li class="mdl-list__item" th:if="${msg_resultado}">						 	
-					 	<p id="p-mensagem-sucesso" class="sucesso-msg" th:text="${msg_resultado}" >...</p>		
-					 </li>
-				 </ul>
-				
-				 
-				<div class="form-group">
-					<label for="titulo">Título</label>
-					<input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título" th:value="${livro.titulo}" required/>
-				</div>
-				<div class="form-group">
-			        <label for="descricao">Descrição</label>
-					<textarea  class="form-control" id="descricao" name="descricao" placeholder="Descricao" th:value="${livro.titulo}" required></textarea>
-				</div>
-				<div class="form-group">
-					<label for="paginas">Páginas</label>
-					<input type="text" class="form-control" id="paginas" name="paginas" placeholder="Páginas" th:value="${livro.titulo}" required/>
-				</div>
-				<div class="form-group">
-					<label for="dataLancamento">Data de  Lançamento</label>
-					<input type="date" class="form-control" id="dataLancamento" name="dataLancamento" placeholder="Data de Lançamento" th:value="${livro.titulo}" required/>
-				</div>
-					<div class="form-group"> 
-						<label for="preco">Preco</label>
-						<input type="text" class="form-control" id="preco" name="preco" placeholder="preço" required th:value="${livro.titulo}" onkeyup="dinheiro(this);"/>
+<div th:insert="~{fragment/admin :: menu-alterar}"></div>
+<section class="container">
+			<h1 class="titulo">Alterar Produto</h1>
+	<div class="row">
+		<div class="col-sm formulario-div">
+			<form action="#" id="form-edit" method="post" enctype="multipart/form-data">
+				<fieldset>
+					<ul class="mdl-list">
+						 <li class="mdl-list__item" th:if="${msg_resultado}">						 	
+						 	<p id="p-mensagem-sucesso" class="sucesso-msg" th:text="${msg_resultado}" >...</p>		
+						 </li>
+					 </ul>
+					
+					 
+					<div class="form-group">
+						<label for="titulo">Título</label>
+						<input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título" th:value="${livro.titulo}" required/>
 					</div>
-				<div class="form-group">
-				    <label for="sumario" >Sumário</label>
-				    <input id="sumario" name="sumario" type="file" class="form-control" accept=".png, .jpg,.jpeg" />
-				</div>
-				
-				<input type="hidden" th:value="${livro.id }" id="livroId" name="livroId" >
-				
-				<button type="submit" class="btn btn-primary">Cadastrar</button>
-			</fieldset>
-		</form>
+					<div class="form-group">
+				        <label for="descricao">Descrição</label>
+						<textarea  class="form-control" id="descricao" name="descricao" placeholder="Descricao" required onfocus="this.innerHTML=''"><span th:text="${livro.descricao}"></span></textarea>
+					</div>
+					<div class="form-group">
+						<label for="paginas">Páginas</label>
+						<input type="text" class="form-control" id="paginas" name="paginas" placeholder="Páginas" th:value="${livro.paginas}" required/>
+					</div>
+					<div class="form-group">
+						<label for="dataLancamento">Data de  Lançamento</label>
+						<input type="date" class="form-control" id="dataLancamento" name="dataLancamento" placeholder="Data de Lançamento" th:value="${livro.dataLancamento}" required/>
+					</div>
+						<div class="form-group"> 
+							<label for="preco">Preco</label>
+							<input type="text" class="form-control" id="preco" name="preco" placeholder="preço" required th:value="${livro.preco}" onkeyup="dinheiro(this);"/>
+						</div>
+					<div class="form-group">
+					    <label for="sumario" >Sumário</label>
+					    <input id="sumario" name="sumario" type="file" class="form-control" accept=".png, .jpg,.jpeg" />
+					</div>
+					
+					<input type="hidden" th:value="${livro.id }" id="livroId" name="livroId" >
+					
+					<button type="submit" class="btn btn-primary">Cadastrar</button>
+				</fieldset>
+			</form>
+		</div>
+		<div class="col-sm img-div">
+			<figure>
+				<p><img class="img-base" th:src="${'../../img/capa/' + livro.sumarioPath}">
+				<figcaption class="img-legenda">Imagem atual</figcaption>
+			</figure>
+		</div>
 	</div>
-</div>
+</section>
 
-<div th:insert="~{fragment/admin :: footer}"></div>
+<footer th:insert="~{fragment/admin :: footer}"></footer>
 
-<script type="text/javascript" th:src="@{../js/jquery.js}"></script>
-<script type="text/javascript" th:src="@{../js/form.js}"></script>
+<script type="text/javascript" th:src="@{../../js/jquery.js}"></script>
+<script type="text/javascript" th:src="@{../../js/editar.js}"></script>
 
 </body>
 </html>

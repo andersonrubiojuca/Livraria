@@ -24,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.livraria.livraria.infra.FileSaver;
 import br.com.livraria.livraria.model.Livro;
 import br.com.livraria.livraria.model.Usuario;
+import br.com.livraria.livraria.model.dto.LivroDTO;
 import br.com.livraria.livraria.model.form.LivroForm;
 import br.com.livraria.livraria.service.LivroService;
 import br.com.livraria.livraria.service.UsuarioService;
@@ -110,9 +111,26 @@ public class LivroController {
 			
 			return "redirect:../lista";
 		} else {
-			return "../../erro/404";
+			return "erro/404";
 		}
+	}
+	
+	@RequestMapping(value="/altera/{id}", method=RequestMethod.GET)
+	public String alterarPag(Model model, @PathVariable("id") Long id) {
+		Optional<Livro> livroOp = service.listarPorId(id);
 		
+		if(livroOp.isPresent()) {
+			Livro livro = livroOp.get();
+			
+			LivroDTO livroDTO = new LivroDTO(livro);
+			
+			model.addAttribute("livro", livroDTO);
+			model.addAttribute("nome", getUsuario());
+			
+			return "admin/editar";
+		} else {
+			return "erro/404";
+		}
 	}
 	
 	

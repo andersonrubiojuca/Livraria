@@ -11,7 +11,7 @@ import javax.persistence.Id;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-@Entity
+@Entity(name="livro")
 public class Livro implements Serializable{
 
 	/**
