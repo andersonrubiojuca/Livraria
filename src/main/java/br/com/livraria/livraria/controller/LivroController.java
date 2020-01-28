@@ -123,6 +123,7 @@ public class LivroController {
 			Livro livro = livroOp.get();
 			
 			LivroDTO livroDTO = new LivroDTO(livro);
+			livroDTO.dataInput(livro.getDataLancamento());
 			
 			model.addAttribute("livro", livroDTO);
 			model.addAttribute("nome", getUsuario());

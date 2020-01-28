@@ -52,6 +52,14 @@ public class LivroDTO {
 		return data;
 	}
 	
+	public void dataInput(Calendar cal) {
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		
+		String data = format.format(cal.getTime());
+		
+		this.dataLancamento = data;
+	}
+	
 	
 	private String moeda(double moeda) {
 		return NumberFormat.getCurrencyInstance(new Locale("pt", "br")).format(moeda);
