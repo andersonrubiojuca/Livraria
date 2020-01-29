@@ -124,6 +124,7 @@ public class LivroController {
 			
 			LivroDTO livroDTO = new LivroDTO(livro);
 			livroDTO.dataInput(livro.getDataLancamento());
+			livroDTO.precoForm();
 			
 			model.addAttribute("livro", livroDTO);
 			model.addAttribute("nome", getUsuario());
@@ -134,6 +135,42 @@ public class LivroController {
 		}
 	}
 	
+	@RequestMapping(value="/alterar", method=RequestMethod.POST)
+	public String alterarPost(@Valid LivroForm livroForm,
+							final BindingResult result,
+							@RequestParam("sumario") MultipartFile sumario,
+							@RequestParam("livroId") Long id,
+							Model model,
+							RedirectAttributes redirectAttributes) {
+		Livro livro = livroForm.getLivro();
+		livro.setId(id);
+		
+		Optional<Livro> livroOpRaw = service.listarPorId(id);
+		
+		if(result.hasErrors() || !livroOpRaw.isPresent()) {
+			redirectAttributes.addFlashAttribute("msg_resultado", "Erro em alguns campos!");
+			
+			return "redirect:/form";
+		}
+		
+		Livro livroRaw = livroOpRaw.get();
+		
+		if(sumario.isEmpty()) {
+			livro.setSumarioPath(livroRaw.getSumarioPath());
+		} else {
+			
+			if(!livroRaw.getSumarioPath().equals(Default)) {
+				fileSaver.delete(livroRaw.getSumarioPath());
+			} 
+			
+			String path = fileSaver.write(sumario);
+			livro.setSumarioPath(path);
+		}
+		
+		service.alterar(id, livro);
+		
+		return "redirect:/form";
+	}
 	
 	
 	private String getUsuario() {

@@ -65,7 +65,10 @@ public class LivroDTO {
 		return NumberFormat.getCurrencyInstance(new Locale("pt", "br")).format(moeda);
 	}
 	
-	
+	public void precoForm() {
+		String novoPreco = preco.substring(3);
+		this.preco = novoPreco;
+	}
 	
 	public String getTitulo() {
 		return titulo;

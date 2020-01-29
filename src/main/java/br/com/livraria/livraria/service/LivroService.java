@@ -32,11 +32,8 @@ public class LivroService {
 	}
 	
 	
-	public Optional<Livro> alterar (Long id, Livro livro){
-		Optional<Livro> opLivro;
-			
-		opLivro = repository.editarLivro(id, livro.getTitulo(), livro.getDataLancamento(), livro.getDescricao(), livro.getPaginas(), livro.getPreco(), livro.getSumarioPath());
-		return opLivro;
+	public void alterar (Long id, Livro livro){
+		repository.editarLivro(id, livro.getTitulo(), livro.getDataLancamento(), livro.getDescricao(), livro.getPaginas(), livro.getPreco(), livro.getSumarioPath());
 	}
 	
 	
