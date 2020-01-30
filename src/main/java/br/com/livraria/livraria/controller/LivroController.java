@@ -8,8 +8,6 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,23 +21,20 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.livraria.livraria.infra.FileSaver;
 import br.com.livraria.livraria.model.Livro;
-import br.com.livraria.livraria.model.Usuario;
 import br.com.livraria.livraria.model.dto.LivroDTO;
 import br.com.livraria.livraria.model.form.LivroForm;
 import br.com.livraria.livraria.service.LivroService;
-import br.com.livraria.livraria.service.UsuarioService;
 
 @Controller
 @RequestMapping(value="admin")
 public class LivroController {
 	
-	private final String Default = "default.jpg";
+	private LivroDTO dto = new LivroDTO(new Long(2));
+	private final String generico = dto.getGenerico();
 	
 	@Autowired
 	private LivroService service;
 	
-	@Autowired
-	private UsuarioService usuarioService;
 	
 	@Autowired
     private FileSaver fileSaver;
@@ -49,7 +44,6 @@ public class LivroController {
 	public String form(Model model) {
 
 		model.addAttribute("livro", new Livro());
-		model.addAttribute("nome", getUsuario());
 		
 		return new String("admin/adicionar");
 	}
@@ -77,7 +71,7 @@ public class LivroController {
 			String path = fileSaver.write(sumario);
 			livro.setSumarioPath(path);
 		} else {
-			livro.setSumarioPath(Default);
+			livro.setSumarioPath(generico);
 		}
 		
 		service.salvar(livro);
@@ -91,7 +85,6 @@ public class LivroController {
 	@RequestMapping(value="/lista", method=RequestMethod.GET)
 	public String lista(Model model) {
 		model.addAttribute("livros", service.listar());
-		model.addAttribute("nome", getUsuario());
 		
 		return "admin/lista";
 	}
@@ -103,7 +96,7 @@ public class LivroController {
 		if(livroOp.isPresent()) {
 			Livro livro = livroOp.get();
 			
-			if(!livro.getSumarioPath().equals(Default)) {
+			if(!livro.getSumarioPath().equals(generico)) {
 				fileSaver.delete(livro.getSumarioPath());
 			} 
 			
@@ -127,7 +120,6 @@ public class LivroController {
 			livroDTO.precoForm();
 			
 			model.addAttribute("livro", livroDTO);
-			model.addAttribute("nome", getUsuario());
 			
 			return "admin/editar";
 		} else {
@@ -150,7 +142,7 @@ public class LivroController {
 		if(result.hasErrors() || !livroOpRaw.isPresent()) {
 			redirectAttributes.addFlashAttribute("msg_resultado", "Erro em alguns campos!");
 			
-			return "redirect:/form";
+			return "redirect:../admin/lista";
 		}
 		
 		Livro livroRaw = livroOpRaw.get();
@@ -159,7 +151,7 @@ public class LivroController {
 			livro.setSumarioPath(livroRaw.getSumarioPath());
 		} else {
 			
-			if(!livroRaw.getSumarioPath().equals(Default)) {
+			if(!livroRaw.getSumarioPath().equals(generico)) {
 				fileSaver.delete(livroRaw.getSumarioPath());
 			} 
 			
@@ -167,17 +159,11 @@ public class LivroController {
 			livro.setSumarioPath(path);
 		}
 		
-		service.alterar(id, livro);
+		service.salvar(livro);
 		
-		return "redirect:/form";
+		redirectAttributes.addFlashAttribute("msg_resultado", "Livro editado com sucesso!");
+		return "redirect:../admin/lista";
 	}
 	
 	
-	private String getUsuario() {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		
-		Usuario usuario = usuarioService.login(auth.getName()).get();
-		
-		return "Olá " + usuario.getLogin();
-	}
 }

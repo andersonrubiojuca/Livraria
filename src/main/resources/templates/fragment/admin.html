@@ -22,10 +22,14 @@
 	            </ul>
 	            <ul class="navbar-nav ml-md-auto">
 	            	<li class="nav-item">
-	            		<span class="navbar-text" th:text="${nome}"></span>
-	            	</li>
-	            	<li class="nav-item">
-	            		<a class="nav-link" href="../logout" >Sair</a>
+	            		<a class="nav-link" href="../logout" >
+		            		<div class="dropdown">
+			            		<span class="navbar-text" th:inline="text">Olá [[${#httpServletRequest.remoteUser}]]!</span>
+		            			<div class="dropdown-conteudo">
+		            				Sair
+		            			</div>
+		            		</div>
+	            		</a>
 	            	</li>
 	            </ul>
 	        </div>
@@ -50,13 +54,13 @@
 	            </ul>
 	            <ul class="navbar-nav ml-md-auto">
 	            	<a class="nav-link" href="../../logout" >
-		            	<li class="nav-item">
-		            		<span class="navbar-text" th:text="${nome}">Nome</span>
-		            	</li>
-		            	<li class="nav-item">
-		            		Sair
-		            	</li>
-	            	</a>
+		            		<div class="dropdown">
+			            		<span class="navbar-text" th:inline="text">Olá [[${#httpServletRequest.remoteUser}]]!</span>
+		            			<div class="dropdown-conteudo">
+		            				Sair
+		            			</div>
+		            		</div>
+	            		</a>
 	            </ul>
 	        </div>
 	    </nav>

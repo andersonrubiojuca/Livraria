@@ -24,6 +24,7 @@ public class LivroDTO {
 	
 	private final String generico = "default.jpg";
 	
+
 	public LivroDTO(Livro livro) {
 		this.id = livro.getId();
 		this.titulo = livro.getTitulo();
@@ -68,6 +69,10 @@ public class LivroDTO {
 	public void precoForm() {
 		String novoPreco = preco.substring(3);
 		this.preco = novoPreco;
+	}
+	
+	public String getGenerico() {
+		return generico;
 	}
 	
 	public String getTitulo() {

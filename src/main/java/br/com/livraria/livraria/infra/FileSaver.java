@@ -17,6 +17,12 @@ public class FileSaver {
 	
 	private final String baseFolder = "src\\main\\resources\\static\\img\\capa\\";
 	
+	/**
+	 * 
+	 * @param file
+	 * @return 
+	 *  lembrar que o tamanho não pode superar os 1048576 bytes ou 1,048576 mb.
+	 */
 	public String write(MultipartFile file) {
         try {
         	

@@ -24,9 +24,6 @@ public class UsuarioService {
 	
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
-	public Optional<Usuario> login(String login){
-		return repository.findByLogin(login);
-	}
 
 	public Optional<Usuario> findById(Long idUsuario) {
 		return repository.findById(idUsuario);

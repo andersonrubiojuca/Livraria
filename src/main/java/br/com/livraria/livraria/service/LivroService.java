@@ -32,10 +32,6 @@ public class LivroService {
 	}
 	
 	
-	public void alterar (Long id, Livro livro){
-		repository.editarLivro(id, livro.getTitulo(), livro.getDataLancamento(), livro.getDescricao(), livro.getPaginas(), livro.getPreco(), livro.getSumarioPath());
-	}
-	
 	
 	public ArrayList<LivroDTO> listar(){
 		Iterable<Livro> livros =  repository.findAll();
