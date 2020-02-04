@@ -11,7 +11,7 @@
 <body>
 	<div th:insert="~{fragment/main :: menu}" class="header"></div>
 	
-	<section class="container">
+	<main role="main" class="container">
 		<div class="jumbotron"  th:if="${msg_resultado}">
 			<ul class="mdl-list">
 				<li class="mdl-list__item">						 	
@@ -86,9 +86,9 @@
 					</tr>
 				</tfoot>
 			</table>
-		</section>
+		</main>
 	
-	<footer th:insert="~{fragment/main :: footer}" class="header"></footer>
+	<footer th:insert="~{fragment/main :: footer}" class="footer"></footer>
 	<script type="text/javascript" th:src="@{../js/jquery.maskedinput.min.js}"></script>
 	<script type="text/javascript" th:src="@{../js/finalizar.js}"></script>
 </body>

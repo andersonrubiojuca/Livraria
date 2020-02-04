@@ -36,6 +36,10 @@ body{
 	height: 202px;
 }
 
+main{
+	min-height: 570px;
+}
+
 
 .text-footer, h5{
 	color: white;

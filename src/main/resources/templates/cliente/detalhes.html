@@ -12,12 +12,12 @@
 
 	<div th:insert="~{fragment/main :: menu-site}" class="header"></div>
 	
-	<div class="jumbotron jumbotron-fluid">
+	<main role="main" class="jumbotron jumbotron-fluid">
 	
 		<div class="container">
 	
 			<article id="livro-css-eficiente">
-			<header id="product-highlight" class="clearfix">
+			<div id="product-highlight" class="clearfix">
 				<div id="product-overview" class="container">
 					<img width="280px" height="395px" th:src="${'../../img/capa/' + livro.sumarioPath}"
 						class="product-featured-image" />
@@ -27,7 +27,7 @@
 					</p>
 					<p class="book-description"><span th:text="${livro.descricao }"></span></p>
 				</div>
-			</header>
+			</div>
 	
 			<section class="buy-options clearfix">
 				<form th:action="@{../../site/carrinho}" method="post" class="container">
@@ -67,7 +67,7 @@
 		</article>
 			
 		</div>
-	</div>
+	</main>
 	
 	<footer class="footer" th:insert="~{fragment/main :: footer-detalhe}"></footer>
 </body>

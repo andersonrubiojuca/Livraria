@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@Deprecated
 public class ErrosController {
 
 	//por hora só vai retornar a página do 404
@@ -26,5 +25,20 @@ public class ErrosController {
 		}
 		
 		return "erro/404";
+	}
+	
+	@RequestMapping("/403")
+	public String erro403() {
+		return "erro/403";
+	}
+	
+	@RequestMapping("/500")
+	public String erro500() {
+		return "erro/500";
+	}
+	
+	@RequestMapping("/503")
+	public String erro503() {
+		return "erro/503";
 	}
 }

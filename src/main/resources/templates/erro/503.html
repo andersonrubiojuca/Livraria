@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<link rel="icon" type="imagem/png" th:href="@{../img/livraria-ico.png}" />
+	<title>Livraria Assis - Erro 503</title>
+	<link th:href="@{../css/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+	<link th:href="@{../css/main.css}" rel="stylesheet" />
+	<link th:href="@{../css/index.css}" rel="stylesheet" />
+	<link th:href="@{../css/500.css}" rel="stylesheet" />
+	</head>
+<body class="loading">
+	<div th:insert="~{fragment/main :: menu}" class="header"></div>
+	    
+	  <main role="main">      
+		  <h1>503</h1>
+		  <h2>Serviço temporariamente indisponível <b>:(</b></h2>
+		  <div class="gears">
+		    <div class="gear one">
+		      <div class="bar"></div>
+		      <div class="bar"></div>
+		      <div class="bar"></div>
+		    </div>
+		    <div class="gear two">
+		      <div class="bar"></div>
+		      <div class="bar"></div>
+		      <div class="bar"></div>
+		    </div>
+		    <div class="gear three">
+		      <div class="bar"></div>
+		      <div class="bar"></div>
+		      <div class="bar"></div>
+		    </div>
+		  </div>
+	  </main>
+	  
+		
+	<div class="footer" th:insert="~{fragment/main :: footer}"></div>
+	<script type="text/javascript" th:src="@{../js/500.js}"></script>
+</body>
+</html>
