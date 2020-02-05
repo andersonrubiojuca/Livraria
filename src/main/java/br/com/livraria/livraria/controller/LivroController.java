@@ -104,7 +104,7 @@ public class LivroController {
 			
 			return "redirect:../lista";
 		} else {
-			return "erro/404";
+			return "redirect:../../error";
 		}
 	}
 	

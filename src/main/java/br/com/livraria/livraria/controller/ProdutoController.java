@@ -60,7 +60,7 @@ public class ProdutoController {
 			
 			return "cliente/detalhes";
 		} else {
-			return "erro/404";
+			return "redirect:../../error/404";
 		}
 		
 	}
@@ -88,7 +88,7 @@ public class ProdutoController {
 			return "redirect:/site/carrinho";
 			
 		} else {
-			return "erro/404";
+			return "redirect:../../error/404";
 		}
 		
 	}

@@ -3,19 +3,37 @@ package br.com.livraria.livraria.controller;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class ErrosController {
+public class ErrosController implements ErrorController{
+	
+	private static final String ERROR_PATH = "/error";
+	
 
-	//por hora só vai retornar a página do 404
-	@RequestMapping("/erro")
+	@RequestMapping(ERROR_PATH)
 	public String handleError(HttpServletRequest request) {
-		Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
-		if(status != null) {
-			Integer statusCode = Integer.valueOf(status.toString());
+		Object erronumero = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
+		
+		if(erronumero != null) {
+			Integer statusCode = Integer.valueOf(erronumero.toString());
+			
+			if(statusCode == HttpStatus.NOT_FOUND.value()) {
+				return ERROR_PATH + "/404";
+			} else if (statusCode == HttpStatus.FORBIDDEN.value()) {
+				return ERROR_PATH + "/403";
+			} else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
+				return ERROR_PATH + "/500";
+			} else if (statusCode == HttpStatus.SERVICE_UNAVAILABLE.value()) {
+				return "error/503";
+			} else return ERROR_PATH + "/500";
+		}
+		/*
+		if(erronumero != null) {
+			Integer statusCode = Integer.valueOf(erronumero.toString());
 			
 			if(statusCode == HttpStatus.NOT_FOUND.value()) {
 				return "erro/404";
@@ -23,22 +41,32 @@ public class ErrosController {
 				return "erro/404";
 			}
 		}
-		
-		return "erro/404";
+		*/
+		return ERROR_PATH + "/404";
 	}
 	
-	@RequestMapping("/403")
+	@RequestMapping(ERROR_PATH + "/403")
 	public String erro403() {
-		return "erro/403";
+		return ERROR_PATH + "/403";
 	}
 	
-	@RequestMapping("/500")
+	@RequestMapping(ERROR_PATH + "/404")
+	public String erro404() {
+		return ERROR_PATH + "/404";
+	}
+	
+	@RequestMapping(ERROR_PATH + "/500")
 	public String erro500() {
-		return "erro/500";
+		return ERROR_PATH + "/500";
 	}
 	
-	@RequestMapping("/503")
+	@RequestMapping(ERROR_PATH + "/503")
 	public String erro503() {
-		return "erro/503";
+		return ERROR_PATH + "/503";
+	}
+
+	@Override
+	public String getErrorPath() {
+		return ERROR_PATH;
 	}
 }
