@@ -90,7 +90,14 @@ public class LivroController {
 	}
 	
 	@RequestMapping(value="/deletar/{id}", method=RequestMethod.GET)
-	public String deletar(Model model, @PathVariable("id") Long id) {
+	public String deletar(Model model, @PathVariable("id") String idRaw) {
+		Long id;
+		try {
+			id = Long.parseLong(idRaw);
+		} catch(NumberFormatException e) {
+			return "redirect:../../error/404";
+		}
+		
 		Optional<Livro> livroOp = service.listarPorId(id);
 		
 		if(livroOp.isPresent()) {
@@ -104,12 +111,19 @@ public class LivroController {
 			
 			return "redirect:../lista";
 		} else {
-			return "redirect:../../error";
+			return "redirect:../../error/404";
 		}
 	}
 	
 	@RequestMapping(value="/altera/{id}", method=RequestMethod.GET)
-	public String alterarPag(Model model, @PathVariable("id") Long id) {
+	public String alterarPag(Model model, @PathVariable("id") String idRaw) {
+		Long id;
+		try {
+			id = Long.parseLong(idRaw);
+		} catch(NumberFormatException e) {
+			return "redirect:../../error/404";
+		}
+		
 		Optional<Livro> livroOp = service.listarPorId(id);
 		
 		if(livroOp.isPresent()) {
@@ -123,7 +137,7 @@ public class LivroController {
 			
 			return "admin/editar";
 		} else {
-			return "erro/404";
+			return "redirect:../../error/404";
 		}
 	}
 	
@@ -131,9 +145,16 @@ public class LivroController {
 	public String alterarPost(@Valid LivroForm livroForm,
 							final BindingResult result,
 							@RequestParam("sumario") MultipartFile sumario,
-							@RequestParam("livroId") Long id,
+							@RequestParam("livroId") String idRaw,
 							Model model,
 							RedirectAttributes redirectAttributes) {
+		Long id;
+		try {
+			id = Long.parseLong(idRaw);
+		} catch(NumberFormatException e) {
+			return "redirect:../../error/404";
+		}
+		
 		Livro livro = livroForm.getLivro();
 		livro.setId(id);
 		

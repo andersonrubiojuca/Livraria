@@ -50,7 +50,14 @@ public class ProdutoController {
 	
 
 	@RequestMapping(value="/detalhes/{id}", method=RequestMethod.GET)
-	public String produto(Model model, @PathVariable("id") Long id) {
+	public String produto(Model model, @PathVariable("id") String idRaw) {
+		Long id;
+		try {
+			id = Long.parseLong(idRaw);
+		} catch(NumberFormatException e) {
+			return "redirect:../../error/404";
+		}
+		
 		Optional<Livro> livroOp = service.listarPorId(id);
 		
 		if(livroOp.isPresent()) {
@@ -73,7 +80,14 @@ public class ProdutoController {
 			RedirectAttributes redirectAttributes
 			) {
 		
-		Optional<Livro> livroOp = service.listarPorId(Long.parseLong(livroId));
+		Long id;
+		try {
+			id = Long.parseLong(livroId);
+		} catch(NumberFormatException e) {
+			return "redirect:../../error/404";
+		}
+		
+		Optional<Livro> livroOp = service.listarPorId(id);
 		
 		
 		if(livroOp.isPresent()) {

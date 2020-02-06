@@ -22,14 +22,14 @@ public class ErrosController implements ErrorController{
 			Integer statusCode = Integer.valueOf(erronumero.toString());
 			
 			if(statusCode == HttpStatus.NOT_FOUND.value()) {
-				return ERROR_PATH + "/404";
+				return "redirect:" + ERROR_PATH + "/404";
 			} else if (statusCode == HttpStatus.FORBIDDEN.value()) {
-				return ERROR_PATH + "/403";
+				return "redirect:" + ERROR_PATH + "/403";
 			} else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
-				return ERROR_PATH + "/500";
+				return "redirect:" + ERROR_PATH + "/500";
 			} else if (statusCode == HttpStatus.SERVICE_UNAVAILABLE.value()) {
 				return "error/503";
-			} else return ERROR_PATH + "/500";
+			} else return "redirect:" + ERROR_PATH + "/500";
 		}
 		/*
 		if(erronumero != null) {
@@ -42,7 +42,7 @@ public class ErrosController implements ErrorController{
 			}
 		}
 		*/
-		return ERROR_PATH + "/404";
+		return "redirect:" + ERROR_PATH + "/404";
 	}
 	
 	@RequestMapping(ERROR_PATH + "/403")
@@ -67,6 +67,6 @@ public class ErrosController implements ErrorController{
 
 	@Override
 	public String getErrorPath() {
-		return ERROR_PATH;
+		return "redirect:" + ERROR_PATH;
 	}
 }
