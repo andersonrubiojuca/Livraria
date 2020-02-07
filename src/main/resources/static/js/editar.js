@@ -16,8 +16,16 @@ function lerInput(input){
 		var reader = new FileReader();
 		
 		reader.onload = function(e){
+		
+		 var tamanho = e.total;
+         
+         if(tamanho > 10000000){
+        	 alert("Arquivo acima de 10MB!");
+	         $('#sumario').val('');
+         } else{
 			$('#img-base').attr('src',e.target.result);
 			$('#legenda').text('Nova Imagem');
+         }
 		}
 		reader.readAsDataURL(input.files[0]);
 }

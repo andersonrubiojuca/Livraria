@@ -7,9 +7,6 @@
 <link th:href="@{../css/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
 <link th:href="@{../css/admin.css}" rel="stylesheet" />
 <link th:href="@{../css/form.css}" rel="stylesheet" />
-<link href="../css/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-<link href="../css/admin.css" rel="stylesheet" />
-<link href="../css/form.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -46,8 +43,9 @@
 						<input type="text" class="form-control" id="preco" name="preco" placeholder="preço" required onkeyup="dinheiro(this);"/>
 					</div>
 				<div class="form-group">
-				    <label for="sumario" >Sumário</label>
+				    <label for="sumario" >Sumário</label>				    
 				    <input id="sumario" name="sumario" type="file" class="form-control" accept=".png, .jpg,.jpeg" />
+				    <p><span class="sumario-aviso">Tamanho Máximo: 10MB</span></p>
 				</div>
 				<button type="submit" class="btn btn-primary">Cadastrar</button>
 			</fieldset>
