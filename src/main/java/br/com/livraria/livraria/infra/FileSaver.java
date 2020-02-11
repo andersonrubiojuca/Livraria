@@ -12,17 +12,13 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import br.com.livraria.livraria.model.Livro;
+
 @Component
 public class FileSaver {
 	
 	private final String baseFolder = "src\\main\\resources\\static\\img\\capa\\";
 	
-	/**
-	 * 
-	 * @param file
-	 * @return 
-	 *  lembrar que o tamanho não pode superar os 1048576 bytes ou 1,048576 mb.
-	 */
 	public String write(MultipartFile file) {
         try {
         	
@@ -57,4 +53,22 @@ public class FileSaver {
 		file.delete();
 	}
 
+	public MultipartFile gerarImagem(Livro livro) {
+		byte[] imagemRaw = livro.getCapa();
+		
+		MultipartFile multipartFile = new MockMultipartFile(livro.getTitulo(), imagemRaw);
+		
+		return multipartFile;
+	}
+	
+	public byte[] toByte(MultipartFile multiFile, String titulo) throws IOException {
+		if(multiFile.isEmpty()) {
+			File file = new File(baseFolder + "default.jpg");
+			FileInputStream fileInputStream = new FileInputStream(file);
+			
+			multiFile = new MockMultipartFile(titulo, fileInputStream);
+		} 
+		
+		return multiFile.getBytes();
+	}
 }
