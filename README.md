@@ -7,3 +7,8 @@ Ele possui um banco de dados fictício (H2 Database), sistema de segurança padr
 
 * descompacte o zip e exporte no eclipse
 * Já tem um banco de dados próprio!
+
+## Login para entrar no sistema
+
+Login: admin
+Senha: admin
