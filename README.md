@@ -12,3 +12,8 @@ Ele possui um banco de dados fictício (H2 Database), sistema de segurança padr
 
 Login: admin
 Senha: admin
+
+## Crédito
+Feito por Anderson Juca.
+
+Imagens da capa no www.casadocodigo.com.br
