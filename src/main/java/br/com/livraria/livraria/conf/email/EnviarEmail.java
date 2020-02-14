@@ -63,7 +63,6 @@ public class EnviarEmail{
 			}).start();
 	    	
 	    	
-	    	System.out.println("Deu certo!");
 	    } catch (MessagingException e) {
 	    	e.printStackTrace();
 	    }

@@ -29,7 +29,7 @@ import br.com.livraria.livraria.service.LivroService;
 @RequestMapping(value="admin")
 public class LivroController {
 	
-	private LivroDTO dto = new LivroDTO(new Long(2));
+	private LivroDTO dto = new LivroDTO(new Long(99));
 	private final String generico = dto.getGenerico();
 	
 	@Autowired
@@ -103,9 +103,7 @@ public class LivroController {
 		if(livroOp.isPresent()) {
 			Livro livro = livroOp.get();
 			
-			if(!livro.getSumarioPath().equals(generico)) {
-				fileSaver.delete(livro.getSumarioPath());
-			} 
+			peraiDeletaIssoNao(livro.getSumarioPath(), id);
 			
 			service.remover(id);
 			
@@ -172,9 +170,7 @@ public class LivroController {
 			livro.setSumarioPath(livroRaw.getSumarioPath());
 		} else {
 			
-			if(!livroRaw.getSumarioPath().equals(generico)) {
-				fileSaver.delete(livroRaw.getSumarioPath());
-			} 
+			peraiDeletaIssoNao(livroRaw.getSumarioPath(), id);
 			
 			String path = fileSaver.write(sumario);
 			livro.setSumarioPath(path);
@@ -186,5 +182,14 @@ public class LivroController {
 		return "redirect:../admin/lista";
 	}
 	
+	//para que não delete aquelas imagens padrão
+	private void peraiDeletaIssoNao(String path, Long id) {
+		if(!path.equals(generico)) {
+			if(id > 3) {
+				fileSaver.delete(path);
+				System.out.println(id);
+			}
+		}
+	}
 	
 }

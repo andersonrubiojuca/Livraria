@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>br.com.livraria</groupId>
 	<artifactId>livraria</artifactId>
-	<version>0.6.3</version>
+	<version>1.0.0</version>
 	<name>livraria</name>
 	<description>Projeto de uma livraria</description>
 
@@ -75,13 +75,12 @@
 		    <artifactId>spring-boot-starter-data-jpa</artifactId>
 		    <version>1.4.2.RELEASE</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
-		
-		<!--  dependencia driver mysql  -->
-		<dependency>
-		    <groupId>mysql</groupId>
-		    <artifactId>mysql-connector-java</artifactId>
-		    <version>5.1.35</version><!--$NO-MVN-MAN-VER$-->
-		 </dependency> 
+		 
+		 <!-- BD ficticio -->
+		 <dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
 		
 		
 		<!-- Conversor de JSON para objeto (e vice-versa) -->

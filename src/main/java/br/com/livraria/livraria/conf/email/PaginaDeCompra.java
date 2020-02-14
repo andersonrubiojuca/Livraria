@@ -61,7 +61,7 @@ public class PaginaDeCompra {
 							 tabela(compraEnvio.getCarrinho()) +
 				"		</section>\r\n" + 
 				"		<footer class=\"footer\">\r\n" + 
-				"			<div class=\"footer-copyright text-center py-3\">© 2019 Copyright:\r\n" + 
+				"			<div class=\"footer-copyright text-center py-3\">© 2020 Copyright:\r\n" + 
 				"				Livraria Assis\r\n" + 
 				"			</div>\r\n" + 
 				"		</footer>\r\n" + 
