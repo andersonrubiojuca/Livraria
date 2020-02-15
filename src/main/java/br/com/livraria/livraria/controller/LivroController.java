@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.livraria.livraria.infra.FileSaver;
 import br.com.livraria.livraria.model.Livro;
+import br.com.livraria.livraria.model.TipoCapa;
 import br.com.livraria.livraria.model.dto.LivroDTO;
 import br.com.livraria.livraria.model.form.LivroForm;
 import br.com.livraria.livraria.service.LivroService;
@@ -28,9 +29,6 @@ import br.com.livraria.livraria.service.LivroService;
 @Controller
 @RequestMapping(value="admin")
 public class LivroController {
-	
-	private LivroDTO dto = new LivroDTO(new Long(99));
-	private final String generico = dto.getGenerico();
 	
 	@Autowired
 	private LivroService service;
@@ -71,7 +69,7 @@ public class LivroController {
 			String path = fileSaver.write(sumario);
 			livro.setSumarioPath(path);
 		} else {
-			livro.setSumarioPath(generico);
+			livro.setSumarioPath(TipoCapa.DEFAULT.getGenerico());
 		}
 		
 		service.salvar(livro);
@@ -184,11 +182,9 @@ public class LivroController {
 	
 	//para que não delete aquelas imagens padrão
 	private void peraiDeletaIssoNao(String path, Long id) {
-		if(!path.equals(generico)) {
-			if(id > 3) {
-				fileSaver.delete(path);
-				System.out.println(id);
-			}
+		if(!path.equals(TipoCapa.DEFAULT.getGenerico()) && id > 3) {
+			fileSaver.delete(path);
+			System.out.println(id);
 		}
 	}
 	

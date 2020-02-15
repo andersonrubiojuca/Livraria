@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import br.com.livraria.livraria.model.Livro;
+import br.com.livraria.livraria.model.TipoCapa;
 
 public class LivroDTO {
 	
@@ -22,7 +23,6 @@ public class LivroDTO {
 	private String sumarioPath;
 	
 	
-	private final String generico = "default.jpg";
 	
 
 	public LivroDTO(Livro livro) {
@@ -35,7 +35,7 @@ public class LivroDTO {
 		this.precoRaw = livro.getPreco();
 		
 		if(livro.getSumarioPath() == null) 
-			this.sumarioPath = generico;
+			this.sumarioPath = TipoCapa.DEFAULT.getGenerico();
 		 else 
 			 this.sumarioPath = livro.getSumarioPath();
 		
@@ -71,10 +71,6 @@ public class LivroDTO {
 		this.preco = novoPreco;
 	}
 	
-	public String getGenerico() {
-		return generico;
-	}
-	
 	public String getTitulo() {
 		return titulo;
 	}
@@ -106,7 +102,7 @@ public class LivroDTO {
 	public String toString() {
 		return "LivroDTO [id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", paginas=" + paginas
 				+ ", dataLancamento=" + dataLancamento + ", preco=" + preco + ", precoRaw=" + precoRaw
-				+ ", sumarioPath=" + sumarioPath + ", generico=" + generico + "]";
+				+ ", sumarioPath=" + sumarioPath + "]";
 	}
 	
 	
