@@ -5,7 +5,7 @@ Ele possui um banco de dados fictício (H2 Database), sistema de segurança padr
 
 ## Instalação
 
-* descompacte o zip e exporte no eclipse
+* Clone o projeto e exporte no eclipse
 * Já tem um banco de dados próprio!
 
 ## Login para entrar no sistema
