@@ -65,6 +65,8 @@ public class EnviarEmail{
 	    	
 	    } catch (MessagingException e) {
 	    	e.printStackTrace();
+	    } catch (Exception e) {
+	    	e.printStackTrace();
 	    }
 	}
 }
