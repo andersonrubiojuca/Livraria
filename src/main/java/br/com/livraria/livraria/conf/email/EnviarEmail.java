@@ -23,7 +23,8 @@ public class EnviarEmail{
 		String to = compraEnvio.getEmail();
 		
 		String from = "jucaanderson66@gmail.com";
-		String password = "uDR3YUn69RZwcFg";
+		//String password = "uDR3YUn69RZwcFg";
+		String password = "nqyqrhgwuorakibs";
 		
 		String host = "smtp.gmail.com";
 		
