@@ -174,7 +174,7 @@ public class ProdutoController {
 			compraService.salvar(compras);
 			
 			
-			enviaEmail(compraEnvio);
+			//enviaEmail(compraEnvio);
 			
 			carrinho.limpa();
 			redirectAttributes.addFlashAttribute("msg_resultado", "Compra feita! "

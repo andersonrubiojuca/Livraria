@@ -1,7 +1,7 @@
 ﻿# Livraria
 
-Um site de livraria feito com Spring-boot e Thymeleaf.
-Ele possui um banco de dados fictício (H2 Database), sistema de segurança padrão do spring, envio de email, requisição REST e um mini sistema CRUD para com os livros.
+Um monólito de um site de livraria feito com Spring-boot e Thymeleaf.
+Ele possui um banco de dados fictício (H2 Database), sistema de segurança padrão do spring, envio de email (desativado devido ao google), requisição REST e um mini sistema CRUD para com os livros.
 
 ## Instalação
 
